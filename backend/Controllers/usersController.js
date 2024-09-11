@@ -7,24 +7,32 @@ const {
   const UserModel = require("../Models/UserModel");
   const connectDB = require("../config/db");
   
-  const getAllUsers = async (req, res) => {
+ 
+  const getMyFriends = async (req, res) => {
     try {
-      await connectDB()
-      const users = await UserModel.find({}).select("-password");
-      return res.json(users);
-    } catch (e) {
-      console.log(e);
-      res.status(400).send("Could not get all users");
+
     }
-  };
-  
+    catch(e) {
+        console.log(e);
+        return res.status(404).json({error: "Could not fetch your friends. Please refresh the page."})
+    }
+  }
+
+  const searchUsers = async (req, res) => {
+    try {
+
+    }
+    catch(e) {
+        console.log(e);
+        return res.status(404).json({error: 'Could not search users at the moment. Please refresh the page.'})
+    }
+  }
   const registerUser = async (req, res) => {
     try {
       await connectDB()
       const userName = req.body?.userName;
       const email = req.body?.email;
       const password = req.body?.password;
-      console.log(userName, email, password);
       if (!(userName && email && password)) {
         return res.status(400).json({ error: "Please provide all inputs" });
       }
@@ -44,6 +52,7 @@ const {
         email: email,
         password: hashedPassword,
       });
+
       return res
         .cookie(
           "access_token",
@@ -51,7 +60,6 @@ const {
             new_user._id,
             new_user.userName,
             new_user.email,
-            new_user.isAdmin,
           ),
           { httpOnly: true, secure: true, sameSite: "None" },
         )
@@ -62,30 +70,29 @@ const {
             _id: new_user._id,
             userName: new_user.userName,
             email: new_user.email,
-            isAdmin: new_user.isAdmin,
           },
         });
     } catch (e) {
-      res.status(404).json({
-        error: "Could not register you at the moment. Please try later",
-        e: e.message
-      });
+        console.log(e)
+        return res.status(404).json({
+            error: "Could not register you at the moment. Please try later",
+        });
     }
   };
   
   const loginUser = async (req, res) => {
     try {
       await connectDB()
-      const email = req.body?.email;
+    //   const email = req.body?.email;
+      const userName = req.body?.userName;
       const password = req.body?.password;
-      const doNotLogOut = req.body?.doNotLogOut;
-      if (!email || !password) {
+      if (!userName || !password) {
         return res.status(400).json({ error: "All inputs are required" });
       }
-      const user = await UserModel.findOne({ email });
+      const user = await UserModel.findOne({ userName });
       if (!user) {
         return res.status(503).json({
-          error: "This email is not registered with us. Please register first",
+          error: "This user name is not registered with us. Please register first",
         });
       }
   
@@ -94,14 +101,11 @@ const {
           httpOnly: true,
           secure: true,
           sameSite: "None" 
-        };
-        if (doNotLogOut) {
-          cookieParams = { ...cookieParams, maxAge: 1000 * 60 * 60 * 24 * 7 };
-        }
+        };        
         return res
           .cookie(
             "access_token",
-            generateCookie(user._id, user.userName, user.email, user.isAdmin),
+            generateCookie(user._id, user.userName, user.email),
             cookieParams,
           )
           .json({
@@ -109,18 +113,18 @@ const {
             userLoggedIn: {
               _id: user._id,
               userName: user.userName,
-              email: user.email,
-              isAdmin: user.isAdmin,
-              doNotLogOut,
+              email: user.email,              
             },
           });
-      } else {
+      } 
+      else {
         return res
           .status(400)
           .json({ error: "Wrong password. Please try again" });
       }
     } catch (e) {
-      res.status(401).json({ error: "Could not login user", e: e.message });
+        console.log(e)
+        return res.status(401).json({ error: "Could not login user"});
     }
   };
   
@@ -128,28 +132,26 @@ const {
     try {
       await connectDB()
       const user = await UserModel.findById(req.user._id); // gotten from a custom middleware
-      const avatar = req.body?.avatar;
       const firstName = req.body?.firstName;
       const lastName = req.body?.lastName;
-      const description = req.body?.description;
-      user.avatar = avatar || user.avatar;
+      const highlight = req.body?.highlight;
       user.firstName = firstName || user.firstName;
       user.lastName = lastName || user.lastName;
-      user.description = description || user.description;
+      user.highlight = highlight || user.highlight;
       await user.save();
       return res.status(200).json({
         userUpdated: {
           _id: user._id,
-          isAdmin: user.isAdmin,
           userName: user.userName,
           email: user.email,
         },
       });
-    } catch (e) {
+    }
+    catch (e) {
       console.log(e);
-      res
+      return res
         .status(404)
-        .json({ error: "Could not update profile. Please try again later", e: e.message });
+        .json({ error: "Could not update profile. Please try again later"});
     }
   };
   
@@ -163,19 +165,7 @@ const {
       console.log(e);
       return res
         .status(404)
-        .json({ error: "Could not load user profile. Please reload the page", e: e.message });
-    }
-  };
-  
-  const deleteUser = async (req, res) => {
-    try {
-      await connectDB()
-      const { id } = req.params;
-      const user = await UserModel.findByIdAndDelete(id);
-      res.send("User has been deleted");
-    } catch (e) {
-      console.log(e);
-      res.status(500).send("Could not delete user");
+        .json({ error: "Could not load user profile. Please reload the page"});
     }
   };
   
@@ -184,17 +174,19 @@ const {
       return res
         .clearCookie("access_token")
         .send("You have been logged out. Come again soon!!!");
-    } catch (e) {
-      return res.status(500).json({ error: "Could not logout", e: e.message });
+    } 
+    catch (e) {
+      console.log(e)
+      return res.status(500).json({ error: "Could not logout"});
     }
   };
   
   module.exports = {
-    getAllUsers,
+    getMyFriends,
     loginUser,
     registerUser,
     saveUserProfile,
     getUserProfile,
-    deleteUser,
     logOutUser,
+    searchUsers
   };
