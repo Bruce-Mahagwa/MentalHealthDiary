@@ -23,14 +23,17 @@ const User = new mongoose.Schema(
     lastName: {
       type: String,
     },
-    avatar: {
+    highlight: {
       type: String,
     },
-    description: {
-      type: String,
-    },
+    friends: [
+        {
+            type: mongoose.Schema.Types.ObjectId
+        }
+    ],
+    
   },
-  { timestamps: true },
+  {timestamps: true},
 );
 
 module.exports = mongoose.model("UserModel", User);
