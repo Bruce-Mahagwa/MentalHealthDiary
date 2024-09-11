@@ -28,10 +28,11 @@ const User = new mongoose.Schema(
     },
     friends: [
         {
-            type: mongoose.Schema.Types.ObjectId
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "UserModel"
         }
     ],
-    
+
   },
   {timestamps: true},
 );

@@ -1,4 +1,4 @@
-// files
+// files and functions
 const {
     hashPassword,
     comparePassword,
@@ -46,8 +46,8 @@ const {
         )
         .status(201)
         .json({
-          success: "Congratulations!! You have been registered",
-          userCreated: {
+          message: "Congratulations!! You have been registered",
+          data: {
             _id: new_user._id,
             userName: new_user.userName,
             email: new_user.email,
@@ -64,7 +64,6 @@ const {
   const loginUser = async (req, res) => {
     try {
       await connectDB()
-    //   const email = req.body?.email;
       const userName = req.body?.userName;
       const password = req.body?.password;
       if (!userName || !password) {
@@ -90,8 +89,8 @@ const {
             cookieParams,
           )
           .json({
-            success: "user logged in",
-            userLoggedIn: {
+            message: "user logged in",
+            data: {
               _id: user._id,
               userName: user.userName,
               email: user.email,              
@@ -121,7 +120,7 @@ const {
       user.highlight = highlight || user.highlight;
       await user.save();
       return res.status(200).json({
-        userUpdated: {
+        data: {
           _id: user._id,
           userName: user.userName,
           email: user.email,
@@ -141,7 +140,7 @@ const {
       await connectDB()
       const { id } = req.params;
       const user = await UserModel.findById(id).select("-password");
-      return res.status(200).json({ user });
+      return res.status(200).json({ data: user });
     } catch (e) {
       console.log(e);
       return res
@@ -154,7 +153,7 @@ const {
     try {
       return res
         .clearCookie("access_token")
-        .send("You have been logged out. Come again soon!!!");
+        .json({message: "You have been logged out. Come again soon!!!"});
     } 
     catch (e) {
       console.log(e)

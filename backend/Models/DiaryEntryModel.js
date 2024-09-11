@@ -7,17 +7,20 @@ const DiaryEntry = new mongoose.Schema(
         type: String,
         required: true
     },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "UserModel"
+    },
     createdAt: {
-        type: mongoose.Schema.Types.ObjectId
+        type: Date
+    },
+    updatedAt: {
+        type: Date
     },
     tags: [
         {
-            userName: {
-                type: String
-            },
-            userId: {
-                type: mongoose.Schema.Types.ObjectId
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "UserModel"
         }
     ]
   },

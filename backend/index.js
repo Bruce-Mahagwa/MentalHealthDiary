@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 
 // files and functions
-const apiRoutes = require("./routes/apiRoutes");
+const apiRoutes = require("./Routes/apiRoutes");
 
 // variables
 const app = express();
