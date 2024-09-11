@@ -37,6 +37,12 @@ const User = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "UserModel"
         }
+    ],
+    diary_entries: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "DiaryEntryModel"
+        }
     ]
   },
   {timestamps: true},
