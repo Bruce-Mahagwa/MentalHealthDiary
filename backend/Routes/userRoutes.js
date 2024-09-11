@@ -19,9 +19,9 @@ router.post("/login", loginUser);
 router.post("/register", registerUser);
 router.get("/user/logout", logOutUser);
 
-router.use(verifyIsLoggedIn); // checks for login permissions
+router.use(verifyIsLoggedIn); // checks for login permissions 
 
-router.put("/user", saveUserProfile);
+router.post("/user", saveUserProfile);
 router.get("/user/:id", getUserProfile);
 
 

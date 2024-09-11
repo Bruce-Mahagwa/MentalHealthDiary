@@ -14,11 +14,12 @@ const verifyIsLoggedIn = (req, res, next) => {
     } 
     catch (e) {
       console.log(e);
-      res.status(401).json({error: "Unauthorized User"});
+      return res.status(401).json({error: "Unauthorized User"});
     }
-  } catch (e) {
+  } 
+  catch (e) {
     console.log(e);
-    res.status(401).json({error: "Error login you in. Please refresh page or log in again."});
+    return res.status(401).json({error: "Error logging you in. Please refresh page or log in again."});
   }
 };
 
