@@ -40,16 +40,74 @@ const getMyFriends = async (req, res) => {
   const sendFriendRequest = async (req, res) => {
     try {
         await connectDB();
-    }
+        const friend_id = req.params.friend_id;
+        // 
+        const requester_id = req.params.requester_id;
+        // 
+        const friend = await UserModel.findById(friend_id);
+        friend.friend_requests.push(requester_id);
+        await friend.save();
+  }
     catch(e) {
         console.log(e);
         return res.status(404).json({error: "Could not make friends at this time. Please refresh page."})
     }
   }
 
+  const acceptFriendRequest = async (req, res) => {
+    try {
+        await connectDB();
+        const requester_id = req.params.requester_id;
+        // 
+        const friend_id = req.params.friend_id
+        // 
+        const friend = await UserModel.findById(friend_id);
+        friend.friends.push(requester_id);
+
+        const index_of_request = friend.friend_requests.indexOf(requester_id);
+        if (index_of_request !== -1) {
+            friend.friend_requests.splice(index_of_request, 1);
+        }
+        await friend.save();
+    }
+    catch(e) {
+        console.log(e);
+        return res.status(404).json({error: "Could not accept friend request at this time. Please refresh page."})
+    }
+  }
+
+  const rejectFriendRequest = async (req, res) => {
+    try {
+        await connectDB();
+        const requester_id = req.params.requester_id;
+        // 
+        const friend_id = req.params.friend_id
+        // 
+        const friend = await UserModel.findById(friend_id);
+        const index_of_request = friend.friend_requests.indexOf(requester_id);
+        if (index_of_request !== -1) {
+            friend.friend_requests.splice(index_of_request, 1);
+        }
+        await friend.save();
+    }
+    catch(e) {
+        console.log(e);
+        return res.status(404).json({error: "Could not reject friend request at this time. Please refresh page."})
+    }
+  }
   const removeFriend = async(req, res) => {
     try {
-
+        await connectDB();
+        const requester_id = req.params.requester_id;
+        // 
+        const friend_id = req.params.friend_id
+        // 
+        const friend = await UserModel.findById(friend_id);
+        const index_of_friend = friend.friends.indexOf(requester_id);
+        if (index_of_friend !== -1) {
+            friend.friends.splice(index_of_friend, 1);
+        }
+        await friend.save();
     }
     catch(e) {
         console.log(e);
@@ -57,4 +115,4 @@ const getMyFriends = async (req, res) => {
     }
   }
 
-  module.exports = {removeFriend, searchUsers, sendFriendRequest, getMyFriends}
+  module.exports = {removeFriend, searchUsers, sendFriendRequest, getMyFriends, acceptFriendRequest, rejectFriendRequest}

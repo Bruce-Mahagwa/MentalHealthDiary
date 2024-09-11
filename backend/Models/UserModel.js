@@ -32,7 +32,12 @@ const User = new mongoose.Schema(
             ref: "UserModel"
         }
     ],
-
+    friend_requests: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "UserModel"
+        }
+    ]
   },
   {timestamps: true},
 );
