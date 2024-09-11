@@ -6,27 +6,8 @@ const {
   const { generateCookie } = require("../Lib/generateCookie");
   const UserModel = require("../Models/UserModel");
   const connectDB = require("../config/db");
-  
- 
-  const getMyFriends = async (req, res) => {
-    try {
 
-    }
-    catch(e) {
-        console.log(e);
-        return res.status(404).json({error: "Could not fetch your friends. Please refresh the page."})
-    }
-  }
 
-  const searchUsers = async (req, res) => {
-    try {
-
-    }
-    catch(e) {
-        console.log(e);
-        return res.status(404).json({error: 'Could not search users at the moment. Please refresh the page.'})
-    }
-  }
   const registerUser = async (req, res) => {
     try {
       await connectDB()
@@ -182,11 +163,9 @@ const {
   };
   
   module.exports = {
-    getMyFriends,
     loginUser,
     registerUser,
     saveUserProfile,
     getUserProfile,
-    logOutUser,
-    searchUsers
+    logOutUser
   };
