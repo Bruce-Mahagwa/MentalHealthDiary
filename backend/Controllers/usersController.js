@@ -11,7 +11,7 @@ const {
   const registerUser = async (req, res) => {
     try {
       await connectDB()
-      const userName = req.body?.userName;
+      const userName = req.body?.userName; 
       const email = req.body?.email;
       const password = req.body?.password;
       if (!(userName && email && password)) {

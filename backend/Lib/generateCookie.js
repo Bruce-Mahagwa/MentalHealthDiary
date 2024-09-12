@@ -1,9 +1,12 @@
+// dependencies
 const jwt = require("jsonwebtoken");
 
+// variables
+
 const generateCookie = (_id, userName, email) => {
-  return jwt.sign(
+  return jwt.sign(  
     { _id, userName, email},
-    process.env["JWT_SECRET"],
+    process.env.JWT_SECRET,
     { expiresIn: "24h" },
   );
 };

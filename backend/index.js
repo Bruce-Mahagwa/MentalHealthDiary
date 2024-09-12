@@ -1,6 +1,7 @@
 // dependencies
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 // files and functions
 const apiRoutes = require("./Routes/apiRoutes");
@@ -22,8 +23,8 @@ const corsoptions = {
     }
     if (whitelist.indexOf(origin) !== -1) {
       return callback(null, true);
-    } else {
-      console.log(whitelist.indexOf(origin));
+    } 
+    else {
       return callback(new Error("not allowed by cors"));
     }
   },
@@ -32,6 +33,7 @@ const corsoptions = {
 
 app.use(cors(corsoptions));
 app.use(express.json());
+app.use(cookieParser());
 app.use(apiRoutes);
 
 app.listen(PORT)
