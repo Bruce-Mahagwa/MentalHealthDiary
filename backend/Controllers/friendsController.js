@@ -225,7 +225,7 @@ const getMyFriends = async (req, res) => {
         await connectDB();
         const search_query = req?.query?.name;
         // search under username, firstname and lastname
-        if (search_query.trim().length === 0) {
+        if (search_query?.trim().length === 0) {
             return res.status(200).json({data: []});
         }
         const re = new RegExp(search_query, "i")

@@ -9,11 +9,11 @@ const {
 
 const {
     verifyIsLoggedIn
-} = require("../Middleware/verifyAuthToken");
+} = require("../Middleware/verifyAuthToken"); 
 
 router.use(verifyIsLoggedIn);
 
-router.post("/diary", saveEntry);
-router.put("/diary", updateEntry);
+router.post("/add", saveEntry);
+router.put("/edit/:id", updateEntry);
 
 module.exports = router;

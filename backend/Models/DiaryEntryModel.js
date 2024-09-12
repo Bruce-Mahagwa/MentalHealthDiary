@@ -5,18 +5,12 @@ const DiaryEntry = new mongoose.Schema(
   {
     entry: {
         type: String,
-        required: true
+        required: true  
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "UserModel"
-    },
-    createdAt: {
-        type: Date
-    },
-    updatedAt: {
-        type: Date
-    },
+    },    
     tags: [
         {
             type: mongoose.Schema.Types.ObjectId,
