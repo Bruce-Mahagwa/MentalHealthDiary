@@ -5,9 +5,8 @@ const connectDB = require("../config/db");
 const getMyFriends = async (req, res) => {
     try {
         await connectDB();
-        const user_id = req?.params?.id;
-        const friends = await UserModel.findById(user_id).populate("friends").select("userName firstName lastName highlight")
-        // returns the friends document with an empty friends array if no friends are found
+        const user_id = req.user._id;
+        const friends = await UserModel.findById(user_id).select("friends").populate("friends", {password: 0, friends: 0, friend_requests_sent:0, updatedAt: 0, diary_entries: 0, friend_requests: 0, email: 0})
         return res.status(200).json({
             data: friends
             }
@@ -95,6 +94,10 @@ const getMyFriends = async (req, res) => {
         const friend = await UserModel.findById(friend_id);
         const requester = await UserModel.findById(requester_id);
 
+        const is_already_friend = friend.friends.indexOf(requester_id);
+        if (is_already_friend !== -1) {
+            return res.status(201).json({message: "You are already friends"})
+        }
         const index_of_request = friend.friend_requests.indexOf(requester_id);
         if (index_of_request !== -1) {
             friend.friend_requests.splice(index_of_request, 1);
@@ -122,7 +125,7 @@ const getMyFriends = async (req, res) => {
     try {
         await connectDB();
         const user_id = req.user._id;
-        const friend_requests = await UserModel.findById(user_id).select("friend_requests").populate("friend_requests", "userName firstName lastName highlight")
+        const friend_requests = await UserModel.findById(user_id).select("friend_requests").populate("friend_requests", {password: 0, friends: 0, friend_requests_sent:0, updatedAt: 0, diary_entries: 0, friend_requests: 0, email: 0})
         return res.status(200).json({
             data: friend_requests
         })
@@ -137,7 +140,7 @@ const getMyFriends = async (req, res) => {
     try {
         await connectDB();
         const user_id = req.user._id;
-        const friend_requests_sent = await UserModel.findById(user_id).select("friend_requests_sent").populate("friend_requests_sent", "userName firstName lastName highlight");
+        const friend_requests_sent = await UserModel.findById(user_id).select("friend_requests_sent").populate("friend_requests_sent", {password: 0, friends: 0, friend_requests_sent:0, updatedAt: 0, diary_entries: 0, friend_requests: 0, email: 0});
         return res.status(200).json({
             data: friend_requests_sent
         })
@@ -159,7 +162,7 @@ const getMyFriends = async (req, res) => {
         const potential_friend_index = potential_friend.friend_requests.indexOf(my_id);
         
         if (potential_friend_index !== -1) {
-            potential_friend.friends.splice(potential_friend_index, 1);
+            potential_friend.friend_requests.splice(potential_friend_index, 1);
         }
 
         const my_request_index = me.friend_requests_sent.indexOf(potential_friend_id);
@@ -170,6 +173,7 @@ const getMyFriends = async (req, res) => {
 
         await potential_friend.save();
         await me.save();
+
         return res.status(200).json({
             my_requests: me.friend_requests_sent,
             potential_friend: potential_friend.friend_requests
@@ -188,6 +192,9 @@ const getMyFriends = async (req, res) => {
         const requester_id = req.params.id;
         const friend_id = req.user._id
 
+        if (requester_id === friend_id) {
+            return res.status(201).json({message: "You cannot unfriend yourself"})
+        }
         const friend = await UserModel.findById(friend_id);
         const requester = await UserModel.findById(requester_id);
 
