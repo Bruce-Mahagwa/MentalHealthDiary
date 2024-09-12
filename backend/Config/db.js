@@ -1,9 +1,10 @@
 // dependencies
 const mongoose = require("mongoose");
-
+// variables
+const MONGO_URI = "mongodb+srv://Bruce:Bruce77@cluster0.uybllbu.mongodb.net/MentalHealthDiary?retryWrites=true&w=majority"
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(MONGO_URI);
     console.log("connected to db");
   } catch (e) {
     console.log("failed to connect to database");
