@@ -5,7 +5,7 @@ const router = express.Router();
 // files
 const {
     saveEntry, updateEntry
-} = require("../Controllers/diaryentryControllers");
+} = require("../Controllers/diaryentryController.js");
 
 const {
     verifyIsLoggedIn

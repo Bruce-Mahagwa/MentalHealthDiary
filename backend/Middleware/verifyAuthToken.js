@@ -1,14 +1,16 @@
 // dependencies
 const jwt = require("jsonwebtoken");
+// variables
+const JWT_SECRET = "alovesongforbobbylong";
 
 const verifyIsLoggedIn = (req, res, next) => {
   const token = req.cookies?.access_token;
   try {   
     if (!token) {
-      return res.status(403).json({error: "You are not authenticated"});
+      return res.status(403).json({error: "You are not authenticated. Please login first."});
     }
     try {
-      const userInfo = jwt.verify(token, process.env["JWT_SECRET"]);
+      const userInfo = jwt.verify(token, JWT_SECRET);
       req.user = userInfo;
       next();
     } 

@@ -82,7 +82,7 @@ const {
           secure: true,
           sameSite: "None" 
         };        
-        return res
+        return res 
           .cookie(
             "access_token",
             generateCookie(user._id, user.userName, user.email),
@@ -111,7 +111,7 @@ const {
   const saveUserProfile = async (req, res) => {
     try {
       await connectDB()
-      const user = await UserModel.findById(req.user._id); // gotten from a custom middleware
+      const user = await UserModel.findById(req.user._id).select("-password");
       const firstName = req.body?.firstName;
       const lastName = req.body?.lastName;
       const highlight = req.body?.highlight;
@@ -120,11 +120,7 @@ const {
       user.highlight = highlight || user.highlight;
       await user.save();
       return res.status(200).json({
-        data: {
-          _id: user._id,
-          userName: user.userName,
-          email: user.email,
-        },
+        data: user, 
       });
     }
     catch (e) {

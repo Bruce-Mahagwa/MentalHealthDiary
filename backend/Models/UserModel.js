@@ -7,7 +7,7 @@ const User = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-    },
+    },    
     email: {
       type: String,
       required: true,
@@ -37,6 +37,12 @@ const User = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "UserModel"
         }
+    ],
+    friend_requests_sent: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "UserModel"
+      }
     ],
     diary_entries: [
         {

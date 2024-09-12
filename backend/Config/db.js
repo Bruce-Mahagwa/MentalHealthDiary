@@ -1,7 +1,6 @@
 // dependencies
 const mongoose = require("mongoose");
 // variables
-const MONGO_URI = "mongodb+srv://Bruce:Bruce77@cluster0.uybllbu.mongodb.net/MentalHealthDiary?retryWrites=true&w=majority"
 const connectDB = async () => {
   try {
     await mongoose.connect(MONGO_URI);

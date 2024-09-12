@@ -21,7 +21,7 @@ const DiaryEntry = new mongoose.Schema(
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "UserModel"
-        }
+        } 
     ]
   },
   {timestamps: true},

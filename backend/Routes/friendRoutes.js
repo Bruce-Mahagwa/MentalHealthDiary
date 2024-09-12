@@ -4,7 +4,8 @@ const express = require("express");
 const router = express.Router();
 // files
 const {
-    removeFriend, searchUsers, sendFriendRequest, getMyFriends, acceptFriendRequest, rejectFriendRequest
+    removeFriend, searchUsers, sendFriendRequest, getMyFriends, acceptFriendRequest, rejectFriendRequest,
+    getMyFriendRequests, getFriendRequestsSent
 } = require("../Controllers/friendsController");
 
 const {
@@ -13,11 +14,16 @@ const {
 
 router.use(verifyIsLoggedIn);
 
-router.get("/", getMyFriends);
-router.get("/search", searchUsers);
-router.post("/request", sendFriendRequest);
+router.get("/fetchfriends/:id", getMyFriends);
+router.post("/request/:id", sendFriendRequest);
+
+router.get("/requests", getMyFriendRequests);
+router.get("/requests_sent", getFriendRequestsSent);
+
+router.post("/reject_request/:id", rejectFriendRequest);
 router.post("/accept_request", acceptFriendRequest);
-router.post("/reject_request", rejectFriendRequest);
-router.post("/unfriend", removeFriend);
+router.post("/unfriend", removeFriend);  
+router.get("/search", searchUsers);
+
 
 module.exports = router;

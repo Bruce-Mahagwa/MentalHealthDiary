@@ -7,7 +7,7 @@ const {
     loginUser,
     registerUser,
     saveUserProfile,
-    getUserProfile,
+    getUserProfile, 
     logOutUser
 } = require("../Controllers/usersController");
 
