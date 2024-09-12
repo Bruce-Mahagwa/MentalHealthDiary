@@ -116,6 +116,8 @@ const getMyFriends = async (req, res) => {
     }
   }
 
+
+
   const getMyFriendRequests = async (req, res) => {
     try {
         await connectDB();
@@ -145,6 +147,40 @@ const getMyFriends = async (req, res) => {
         return res.status(404).json({error: "Could not get your friend requests sent at this time. Please refresh page."})
     }
   }
+
+  const deleteFriendRequest = async (req, res) => {
+    try {
+        const potential_friend_id = req.params.id;
+        const my_id = req.user._id;
+
+        const potential_friend = await UserModel.findById(potential_friend_id);
+        const me = await UserModel.findById(my_id);
+
+        const potential_friend_index = potential_friend.friend_requests.indexOf(my_id);
+        
+        if (potential_friend_index !== -1) {
+            potential_friend.friends.splice(potential_friend_index, 1);
+        }
+
+        const my_request_index = me.friend_requests_sent.indexOf(potential_friend_id);
+
+        if (my_request_index !== -1) {
+            me.friend_requests_sent.splice(my_request_index, 1);
+        }
+
+        await potential_friend.save();
+        await me.save();
+        return res.status(200).json({
+            my_requests: me.friend_requests_sent,
+            potential_friend: potential_friend.friend_requests
+        })
+    }
+    catch(e) {
+        console.log(e);
+        return res.status(404).json({error: "Could not delete the friend request at this time. Please refresh page."})
+    }
+  }
+
 
   const removeFriend = async(req, res) => {
     try {
@@ -200,4 +236,4 @@ const getMyFriends = async (req, res) => {
     }
   }
 
-  module.exports = {removeFriend, searchUsers, sendFriendRequest, getMyFriends, acceptFriendRequest, rejectFriendRequest, getMyFriendRequests, getFriendRequestsSent}
+  module.exports = {removeFriend, searchUsers, sendFriendRequest, getMyFriends, acceptFriendRequest, rejectFriendRequest, getMyFriendRequests, getFriendRequestsSent, deleteFriendRequest}
