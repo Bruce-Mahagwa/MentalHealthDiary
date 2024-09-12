@@ -21,8 +21,11 @@ router.get("/requests", getMyFriendRequests);
 router.get("/requests_sent", getFriendRequestsSent);
 
 router.post("/reject_request/:id", rejectFriendRequest);
-router.post("/accept_request", acceptFriendRequest);
-router.post("/unfriend", removeFriend);  
+
+router.post("/accept_request/:id", acceptFriendRequest);
+
+router.post("/unfriend/:id", removeFriend);  
+
 router.get("/search", searchUsers);
 
 

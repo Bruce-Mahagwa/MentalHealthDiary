@@ -39,8 +39,8 @@ const getMyFriends = async (req, res) => {
         await friend.save();
         await requester.save();
         return res.status(200).json({
-            data1: friend.friend_requests,
-            data2: requester.friend_requests_sent
+            friend_model: friend.friend_requests,
+            requester_model: requester.friend_requests_sent
         })
   }
     catch(e) {
@@ -55,6 +55,9 @@ const getMyFriends = async (req, res) => {
         const requester_id = req.params.id;
         const friend_id = req.user._id;
 
+        if (requester_id === friend_id) {
+            return res.status(403).json({error: "You cannot unfriend yourself."})
+        }
         const friend = await UserModel.findById(friend_id);
         const requester = await UserModel.findById(requester_id);
         
@@ -82,18 +85,30 @@ const getMyFriends = async (req, res) => {
   const acceptFriendRequest = async (req, res) => {
     try {
         await connectDB();
-        const requester_id = req.params.requester_id;
-        // 
-        const friend_id = req.params.friend_id
-        // 
+        const requester_id = req.params.id;
+        const friend_id = req.user._id;
+
+        if (requester_id === friend_id) {
+            return res.status(403).json({error: "You cannot befriend yourself."})
+        }
+
         const friend = await UserModel.findById(friend_id);
-        friend.friends.push(requester_id);
+        const requester = await UserModel.findById(requester_id);
 
         const index_of_request = friend.friend_requests.indexOf(requester_id);
         if (index_of_request !== -1) {
             friend.friend_requests.splice(index_of_request, 1);
+            friend.friends.push(requester_id); //add as friend
+        }
+        const index_of_request_sent = requester.friend_requests_sent.indexOf(friend_id);
+        if (index_of_request_sent !== -1) {
+            requester.friend_requests_sent.splice(index_of_request_sent, 1);
         }
         await friend.save();
+        await requester.save();
+        return res.status(200).json({
+            data: friend.friends
+        })
     }
     catch(e) {
         console.log(e);
@@ -134,16 +149,27 @@ const getMyFriends = async (req, res) => {
   const removeFriend = async(req, res) => {
     try {
         await connectDB();
-        const requester_id = req.params.requester_id;
-        // 
-        const friend_id = req.params.friend_id
-        // 
+        const requester_id = req.params.id;
+        const friend_id = req.user._id
+
         const friend = await UserModel.findById(friend_id);
+        const requester = await UserModel.findById(requester_id);
+
         const index_of_friend = friend.friends.indexOf(requester_id);
         if (index_of_friend !== -1) {
             friend.friends.splice(index_of_friend, 1);
         }
+        const index_of_friend_in_requester_model = requester.friends.indexOf(friend_id);
+        if (index_of_friend_in_requester_model !== -1) {
+            requester.friends.splice(index_of_friend_in_requester_model, 1);
+        }
+        
         await friend.save();
+        await requester.save();
+        return res.status(200).json({
+            friend_model: friend.friends,
+            requester_model: requester.friends
+        })
     }
     catch(e) {
         console.log(e);
