@@ -228,9 +228,13 @@ const getMyFriends = async (req, res) => {
         if (search_query.trim().length === 0) {
             return res.status(200).json({data: []});
         }
+        const re = new RegExp(search_query, "i")
         const results = await UserModel.find({$or: [
-            {userName: /search_query/i}, {firstName: /search_query/i}, {lastName: /search_query/i}
+            {userName: {$regex: re}}, 
+            {firstName: {$regex: re}},
+            {lastName: {$regex: re}}
         ]}).select("userName highlight firstName lastName")
+        
         const data = [];
         await results.forEach((user) => {
             data.push(user);
