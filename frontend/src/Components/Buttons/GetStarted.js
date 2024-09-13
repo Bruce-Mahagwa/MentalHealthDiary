@@ -6,7 +6,7 @@ const GetStarted = () => {
     const navigate = useNavigate();
 
     return (
-        <Button onClick = {() => navigate("/home")} variant = "danger" size = "lg" className = "w-max self-center mb-12">
+        <Button onClick = {() => navigate("/register")} variant = "danger" size = "lg" className = "w-max self-center mb-12">
             Get Started 
             <FaArrowRightLong className = "inline-block ml-2" />
         </Button>
