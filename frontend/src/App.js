@@ -19,7 +19,7 @@ function App() {
 
           {/* user logged in */}
           <Route element = {<Layout />}>
-      
+
           </Route>
       </Routes>
     </BrowserRouter>

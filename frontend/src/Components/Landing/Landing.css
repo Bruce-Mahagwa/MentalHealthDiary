@@ -1,0 +1,14 @@
+#landing {
+    background: url("../../assets/images/landing_small.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+@media screen and (min-width: 550px) {
+    #landing {
+        background: url("../../assets/images/landing.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+}
