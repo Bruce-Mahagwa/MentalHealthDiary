@@ -4,8 +4,8 @@ import { Button, Label, TextInput, Modal } from "flowbite-react";
 import "./Form.css"
 const Register = ({openModalRegister, setOpenModalRegister}) => {
     return (
-        <Modal show={openModalRegister} onClose={() => setOpenModalRegister(false)}>
-            <Modal.Header>Login</Modal.Header>
+        <Modal show={openModalRegister} onClose={() => setOpenModalRegister(false)} dismissible>
+            <Modal.Header>Register</Modal.Header>
             <Modal.Body>
                 <form className="flex max-w-md flex-col gap-4 mx-auto mt-8">
                     <div>
@@ -34,11 +34,11 @@ const Register = ({openModalRegister, setOpenModalRegister}) => {
                     </div>
                     <div>
                         <div className="mb-2 block">
-                        <Label htmlFor="repeat-password" value="Repeat password" />
+                            <Label htmlFor="repeat-password" value="Repeat password" />
                         </div>
                         <TextInput id="repeat-password" type="password" required shadow />
                     </div>
-                    <Button type="submit">Register new account</Button>
+                    <Button type="submit" className = "text-black">Register new account</Button>
                 </form>
             </Modal.Body>
         </Modal>
