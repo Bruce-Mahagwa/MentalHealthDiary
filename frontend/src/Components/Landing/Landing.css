@@ -4,6 +4,12 @@
     background-size: cover;
     background-position: center;
 }
+#intro {
+    background: url('../../assets/images/landing_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 @media screen and (min-width: 550px) {
     #landing {
         background: url("../../assets/images/landing.jpg");
