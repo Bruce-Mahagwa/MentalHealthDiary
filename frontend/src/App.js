@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+// files
 import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Landing from './Components/Landing/Landing';
+import Layout from './Layout';
+// dependencies
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import axios from "axios"
 function App() {
+  axios.defaults.baseURL = "https://things-we-like-api.vercel.app"
+  axios.defaults.withCredentials = true;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+          {/* user not logged in yet */}
+          <Route path = "/" element = {<Landing />} />
+          {/* end of user not logged in yet */}
+
+          {/* user logged in */}
+          <Route element = {<Layout />}>
+      
+          </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
