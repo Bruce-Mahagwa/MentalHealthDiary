@@ -1,13 +1,15 @@
 // files
 import Editor from "../Editor/Editor";
 import ContentHeader from "../Headers/ContentHeader";
+import ContentFooter from "../Footer/ContentFooter";
 const MainContent = () => {
     return (
-        <section className = "h-max border border-black border-2">
+        <section className = "flex flex-col items-center w-full max-h-screen overflow-y-scroll">
             <ContentHeader />
-            <div>
+            <div className = "w-full">
                 <Editor />
             </div>
+            <ContentFooter />
         </section>
     )
 }

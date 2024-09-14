@@ -8,12 +8,13 @@ import { FcAbout } from "react-icons/fc";
 
 export function DrawerNavigation() {
   return (
-        <div className = "border border-black border-2 h-max">
-            <Sidebar>
-              <div className="flex h-full flex-col justify-between py-2">
+        <div>
+            <Sidebar className = "bg-white">
+              <div className="flex flex-col justify-between py-2 bg-white">
+                <h4>Health Diary</h4>
                 <div>
                   <Sidebar.Items>
-                    <Sidebar.ItemGroup>                    
+                    <Sidebar.ItemGroup className = "pt-0 mt-0">                    
                       <Sidebar.Item icon={FaPen} className="no-underline cursor-pointer">
                         <Button className = 'text-black no-underline border-0' size="sm">Write Posts</Button>
                       </Sidebar.Item>

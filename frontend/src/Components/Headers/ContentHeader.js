@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 const ContentHeader = () => {
     // {title, filter_ribbon, search_bar}
     return (
-        <header className = "my-4">
+        <header className = "my-4 w-4/5 sm:w-4/6 md:w-1/2 lg:w-1/3">
             <h3 className = "text-center">Write Posts</h3>
             {/* navigation for my entries which included filter options */}
             {/* <nav className = "flex gap-2 flex-wrap md:gap-4 justify-center items-center">
@@ -35,7 +35,7 @@ const ContentHeader = () => {
 
             {/* start of navigation for search */}
             <nav className = "flex gap-2 flex-wrap md:gap-4 justify-center items-center">
-                <TextInput type = "text" className = "w-3/4 sm:w-1/2 xl:w-1/3"/> 
+                <TextInput type = "text" className = "w-3/4"/> 
                 <FaSearch className = "cursor-pointer"/>
             </nav>
             {/* end of navigation for search */}

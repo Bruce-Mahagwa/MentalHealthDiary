@@ -4,12 +4,14 @@ import NavigationLoggedIn from "../Navigation/NavigationLoggedIn";
 import DrawerNavigation from "../Navigation/DrawerNavigation";
 import MainContent from "../MainContent/MainContent";
 const Home = () => {
-    return (
+    return ( 
         <>
-            <NavigationLoggedIn />
-            <main id = "main" className = "w-full  overflow-y-auto flex">
-                <DrawerNavigation />
-                <MainContent />
+            <main id = "main" className = "w-full h-screen overflow-y-hidden">
+                <NavigationLoggedIn />
+                <div className = "flex">
+                    <DrawerNavigation />
+                    <MainContent />
+                </div>
             </main>
         </>
     )
