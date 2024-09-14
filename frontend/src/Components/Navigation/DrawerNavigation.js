@@ -1,12 +1,10 @@
 // dependencies
 import { Button, Drawer, Sidebar} from "flowbite-react";
 import { useState } from "react";
-import { FaUserFriends, FaSearch, FaPen, FaCalendarAlt } from "react-icons/fa";
+import { FaSearch, FaPen, FaCalendarAlt } from "react-icons/fa";
 import { IoIosJournal } from "react-icons/io";
 import { HiUsers } from "react-icons/hi";
 import { FcAbout } from "react-icons/fc";
-import { CiSquareQuestion } from "react-icons/ci";
-import { FaRegHandshake } from "react-icons/fa6";
 
 export function DrawerNavigation() {
   const [isOpen, setIsOpen] = useState(true);
@@ -14,10 +12,10 @@ export function DrawerNavigation() {
 
   return (
     <>
-      <div className="flex min-h-[50vh] items-center justify-center">
+      {/* <div className="flex min-h-[50vh] items-center justify-center">
         <Button onClick={() => setIsOpen(true)}>Show navigation</Button>
-      </div>
-      <Drawer open={isOpen} onClose={handleClose}>
+      </div> */}
+      <Drawer backdrop={false} open={isOpen} onClose={handleClose}>
         <Drawer.Header title="HEALTH DIARY" titleIcon={() => <></>} />
         <Drawer.Items>
           <Sidebar
