@@ -7,7 +7,7 @@ const Editor = () => {
 
     return (
      <div>
-    <ReactQuill theme="snow" value={value} onChange={setValue} />
+        <ReactQuill theme="snow" value={value} onChange={setValue} />
     </div>
     )
 }

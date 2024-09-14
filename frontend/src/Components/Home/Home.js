@@ -2,14 +2,16 @@
 import "./Home.css"
 import NavigationLoggedIn from "../Navigation/NavigationLoggedIn";
 import DrawerNavigation from "../Navigation/DrawerNavigation";
-import ContentHeader from "../Headers/ContentHeader";
+import MainContent from "../MainContent/MainContent";
 const Home = () => {
     return (
-        <main id = "main" className = "w-full min-h-screen overflow-y-auto">
+        <>
             <NavigationLoggedIn />
-            <DrawerNavigation />
-            <ContentHeader />
-        </main>
+            <main id = "main" className = "w-full  overflow-y-auto flex">
+                <DrawerNavigation />
+                <MainContent />
+            </main>
+        </>
     )
 }
 export default Home;
