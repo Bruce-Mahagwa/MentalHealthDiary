@@ -9,9 +9,9 @@ const MainContent = () => {
         <section className = "flex flex-col items-center w-full max-h-screen overflow-y-scroll">
             <ContentHeader />
             <div className = "w-full mb-4">
-                <Editor />
+                {/* <Editor /> */}
                 {/* <FriendsContent /> */}
-                {/* <Entries /> */}
+                <Entries />
             </div>
             <ContentFooter />
         </section>
