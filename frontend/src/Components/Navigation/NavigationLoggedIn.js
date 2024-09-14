@@ -1,11 +1,9 @@
 // files
 import { Button, Dropdown } from "flowbite-react";
 // dependencies
-import { useState } from "react";
 import {HiUserCircle} from "react-icons/hi";
 import { FcAbout } from "react-icons/fc";
 import { MdOutlineLogout } from "react-icons/md";
-import { VscThreeBars } from "react-icons/vsc";
 const NavigationLoggedIn = () => {
     return (
         <>
