@@ -1,9 +1,11 @@
 // files
-import { Button, Dropdown } from "flowbite-react";
+import About from "../About/About";
 // dependencies
 import {HiUserCircle} from "react-icons/hi";
 import { FcAbout } from "react-icons/fc";
 import { MdOutlineLogout } from "react-icons/md";
+import { Button, Dropdown } from "flowbite-react";
+
 const NavigationLoggedIn = () => {
     return (
         <>
@@ -36,6 +38,9 @@ const NavigationLoggedIn = () => {
                     Logout
                 </Button>
             </Button.Group>
+            {/* gives info about the app */}
+            <About />
+            {/* gives info about the app */}
         </>
     )  
 }

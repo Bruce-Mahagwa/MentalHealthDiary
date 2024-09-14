@@ -1,7 +1,7 @@
 // dependencies
 import { Button, Drawer, Sidebar} from "flowbite-react";
 import { useState } from "react";
-import { FaSearch, FaPen, FaCalendarAlt } from "react-icons/fa";
+import { FaSearch, FaPen, FaCalendarAlt, FaHashtag } from "react-icons/fa";
 import { IoIosJournal } from "react-icons/io";
 import { HiUsers } from "react-icons/hi";
 import { FcAbout } from "react-icons/fc";
@@ -27,6 +27,10 @@ export function DrawerNavigation() {
                         <Button className = 'text-black no-underline border-0' size="sm">My Entries</Button>
                       </Sidebar.Item>
                       
+                      <Sidebar.Item icon={FaHashtag} className="no-underline cursor-pointer">                      
+                        <Button className = 'text-black no-underline border-0' size="sm">Tagged Entries</Button>
+                      </Sidebar.Item>
+
                       <Sidebar.Item icon={FaSearch} className="no-underline cursor-pointer">                      
                         <Button className = 'text-black no-underline border-0' size="sm">Search</Button>
                       </Sidebar.Item>

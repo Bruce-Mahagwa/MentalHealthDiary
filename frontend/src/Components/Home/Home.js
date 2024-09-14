@@ -6,7 +6,7 @@ import MainContent from "../MainContent/MainContent";
 const Home = () => {
     return ( 
         <>
-            <main id = "main" className = "w-full h-screen overflow-y-hidden">
+            <main id = "main" className = "w-full min-h-screen overflow-y-hidden">
                 <NavigationLoggedIn />
                 <div className = "flex">
                     <DrawerNavigation />

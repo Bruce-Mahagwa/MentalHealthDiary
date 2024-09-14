@@ -6,7 +6,7 @@ import { useState } from "react";
 const ContentFooter = ({make_post}) => {
     const [currentPage, setCurrentPage] = useState(1);
     return (
-        <footer className="mt-20">
+        <footer className="mt-12">
             {/* footer to be used when user is sending a post */}
             {/* <nav className = "flex gap-4"> 
                 <Button color="success">Post</Button>
