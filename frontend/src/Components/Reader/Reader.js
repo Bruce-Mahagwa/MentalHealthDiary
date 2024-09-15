@@ -4,7 +4,7 @@ import { Paper } from "@mui/material";
 
 const Reader = () => {
     return (
-        <Modal show = {true}>
+        <Modal show = {false}>
             <Modal.Header>
                 BruceM - Tuesday/12/2024
             </Modal.Header>

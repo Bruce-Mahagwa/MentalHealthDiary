@@ -6,12 +6,12 @@ import FriendsContent from "../Friends/FriendsContent";
 import Entries from "../Entries/Entries";
 const MainContent = () => {
     return (
-        <section className = "flex flex-col items-center w-full max-h-screen overflow-y-scroll">
+        <section className = "flex flex-col items-center max-h-screen overflow-y-scroll w-full md:w-2/3 lg:w-4/5">
             <ContentHeader />
-            <div className = "w-full mb-4">
+            <div className = "mb-4">
                 {/* <Editor /> */}
                 {/* <FriendsContent /> */}
-                <Entries />
+                <Entries />  
             </div>
             <ContentFooter />
         </section>

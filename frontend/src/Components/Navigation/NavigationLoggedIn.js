@@ -6,10 +6,14 @@ import { FcAbout } from "react-icons/fc";
 import { MdOutlineLogout } from "react-icons/md";
 import { Button, Dropdown } from "flowbite-react";
 
-const NavigationLoggedIn = () => {
+const NavigationLoggedIn = ({setIsOpen}) => {
     return (
         <>
             <Button.Group className = "hidden sm:flex justify-end pr-4 md:pr-10 xl:pr-12 pt-4">
+                <Button outline color="success" className="hover:opacity-0.5 justify-self-start mr-auto md:hidden" onClick={() => setIsOpen(true)}>
+                    <FcAbout className = "mr-1 h-4 w-4"/>
+                    Menu
+                </Button>
                 <Button outline color="success" className="hover:opacity-0.5">
                     <FcAbout className = "mr-1 h-4 w-4"/>
                     About

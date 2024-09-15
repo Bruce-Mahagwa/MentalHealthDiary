@@ -3,13 +3,16 @@ import "./Home.css"
 import NavigationLoggedIn from "../Navigation/NavigationLoggedIn";
 import DrawerNavigation from "../Navigation/DrawerNavigation";
 import MainContent from "../MainContent/MainContent";
+// dependencies
+import { useState } from "react";
 const Home = () => {
+    const [isOpen, setIsOpen] = useState(true);
     return ( 
         <>
             <main id = "main" className = "w-full min-h-screen overflow-y-hidden">
-                <NavigationLoggedIn />
+                <NavigationLoggedIn setIsOpen={setIsOpen} />
                 <div className = "flex">
-                    <DrawerNavigation />
+                    <DrawerNavigation isOpen={isOpen} setIsOpen={setIsOpen}/>
                     <MainContent />
                 </div>
             </main>
