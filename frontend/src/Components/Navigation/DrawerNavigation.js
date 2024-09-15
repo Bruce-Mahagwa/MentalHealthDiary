@@ -64,7 +64,7 @@ export function DrawerNavigation({isOpen, setIsOpen}) {
         </div>
 
         {/* drawer for small screens */}
-        <div className = "md:hidden w-max border-black border-2">
+        <div className = "md:hidden">
           <Drawer open={isOpen} onClose={handleClose} className="md:hidden">
           <Drawer.Header title="MENU" titleIcon={() => <></>} />
           <Drawer.Items>

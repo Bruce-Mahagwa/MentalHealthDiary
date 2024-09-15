@@ -2,6 +2,7 @@
 import "./Landing.css";
 import GetStarted from "../Buttons/GetStarted";
 import NavigationNotLoggedIn from "../Navigation/NavigationNotLoggedIn";
+
 const Landing = () => {
     return (
         <>

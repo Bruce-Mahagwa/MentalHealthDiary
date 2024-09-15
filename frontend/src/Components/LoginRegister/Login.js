@@ -1,7 +1,6 @@
 // dependencies
 import { Button, Label, TextInput, Modal } from "flowbite-react";
-// files
-import "./Form.css"
+
 const Login = ({openModalLogin, setOpenModalLogin}) => {
     return (
         <Modal show={openModalLogin} onClose={() => setOpenModalLogin(false)} dismissible>

@@ -1,6 +1,6 @@
 // files
 import SingleFriendRow from "./SingleFriendRow"
-const FriendsContent = () => {
+const FriendsContent = () => { 
     return (
         <div>
             <SingleFriendRow />

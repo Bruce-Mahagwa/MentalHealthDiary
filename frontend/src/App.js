@@ -9,7 +9,7 @@ import Home from './Components/Home/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import axios from "axios"
 function App() {
-  axios.defaults.baseURL = "https://things-we-like-api.vercel.app"
+  axios.defaults.baseURL = "http://localhost:4000"
   axios.defaults.withCredentials = true;
 
   return (

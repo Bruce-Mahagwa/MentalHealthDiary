@@ -5,8 +5,11 @@ import DrawerNavigation from "../Navigation/DrawerNavigation";
 import MainContent from "../MainContent/MainContent";
 // dependencies
 import { useState } from "react";
+import { useSelector } from "react-redux";
 const Home = () => {
     const [isOpen, setIsOpen] = useState(true);
+    const user = useSelector(state => state.users);
+    // console.log(user)
     return ( 
         <>
             <main id = "main" className = "w-full min-h-screen overflow-y-hidden">

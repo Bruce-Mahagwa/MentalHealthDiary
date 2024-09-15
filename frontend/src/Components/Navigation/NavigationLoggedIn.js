@@ -1,12 +1,17 @@
-// files
+// files and functions
+import { logout } from "./lib";
 import About from "../About/About";
 // dependencies
 import {HiUserCircle} from "react-icons/hi";
 import { FcAbout } from "react-icons/fc";
 import { MdOutlineLogout } from "react-icons/md";
 import { Button, Dropdown } from "flowbite-react";
+import { useDispatch } from "react-redux";
 
 const NavigationLoggedIn = ({setIsOpen}) => {
+
+    const dispatch = useDispatch();
+
     return (
         <>
             <Button.Group className = "hidden sm:flex justify-end pr-4 md:pr-10 xl:pr-12 pt-4">
@@ -22,7 +27,7 @@ const NavigationLoggedIn = ({setIsOpen}) => {
                     <HiUserCircle className="mr-1 h-4 w-4" />
                     Profile
                 </Button>
-                <Button outline color="success">
+                <Button outline color="success" onClick = {() => logout(dispatch)}>
                     <MdOutlineLogout className = "mr-1 h-4 w-4" />
                     Logout
                 </Button>
@@ -37,7 +42,7 @@ const NavigationLoggedIn = ({setIsOpen}) => {
                     <HiUserCircle className="mr-1 h-4 w-4" />
                     Profile
                 </Button>
-                <Button outline color = "success" size="sm">
+                <Button outline color = "success" size="sm" onClick = {() => logout(dispatch)}>
                     <MdOutlineLogout className = "mr-1 h-4 w-4" />
                     Logout
                 </Button>
