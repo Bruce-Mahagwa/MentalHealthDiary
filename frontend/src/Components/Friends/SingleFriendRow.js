@@ -1,7 +1,7 @@
 // dependencies
 import { Button, Spinner, Alert } from "flowbite-react";
 // functions
-import { sendAFriendRequest, withdrawFriendRequestHandler, acceptFriendRequestHandler, rejectFriendRequestHandler } from "./lib";
+import { sendAFriendRequest, withdrawFriendRequestHandler, acceptFriendRequestHandler, rejectFriendRequestHandler, unFriendHandler } from "./lib";
 const SingleFriendRow = ({isFriend, isInvite, isRequest, isNotFriend, userName, highlight, _id, dispatch}) => {
 
     const handleFriendRequest = (e) => {
@@ -32,12 +32,17 @@ const SingleFriendRow = ({isFriend, isInvite, isRequest, isNotFriend, userName, 
         rejectFriendRequestHandler(dispatch, _id)
     }
     
+    const unFriend = (e) => {
+        e.currentTarget.innerText = "Unfriended"
+        e.currentTarget.disabled=true;
+        unFriendHandler(dispatch, _id)
+    }
     return (  
         <div className = "flex justify-between w-full  border-gray-400 border-1 align-middle p-2 sm:p-4">
             <p className = "font-bold">{userName}</p>
             <p>{highlight}</p>
             {isRequest && <Button color = "dark" className = "px-4" onClick={withdrawRequest}>Withdraw</Button>}
-            {isFriend && <Button color = "warning">Unfriend</Button>}
+            {isFriend && <Button color = "warning" onClick={unFriend}>Unfriend</Button>}
             {isInvite && <Button color = "purple" onClick = {acceptFriendRequest} id = "accept">Accept</Button>}
             {isInvite && <Button color = "purple" onClick = {rejectFriendRequest} id = "reject">Reject</Button>}
 

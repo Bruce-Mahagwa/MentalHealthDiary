@@ -97,3 +97,15 @@ export const rejectFriendRequest = createAsyncThunk("/friends/reject_friend", as
         }
     }
 })
+
+export const unFriend = createAsyncThunk("/friends/unfriend", async ({_id}, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.post(`/friends/unfriend/${_id}`);
+        return data;
+    }
+    catch(e) {
+        if (e.response.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }      
+    }
+})

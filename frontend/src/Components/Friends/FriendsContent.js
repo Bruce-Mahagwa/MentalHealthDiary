@@ -10,6 +10,7 @@ import { Alert } from "@mui/material";
 const FriendsContent = () => { 
     const [localError, setLocalError] = useState("")
     const dispatch = useDispatch();
+
     useEffect(() => {
         getFriends(dispatch, setLocalError);
     }, [])
@@ -23,9 +24,9 @@ const FriendsContent = () => {
                 <Alert>You haven't made any friends yet</Alert>
             }
             {!loading && friends.map((friend) => {
-                const {userName, highlight} = friend;
+                const {userName, highlight, _id} = friend;
                 return (
-                    <SingleFriendRow userName = {userName} highlight = {highlight} isFriend={true} key = {userName} />
+                    <SingleFriendRow userName = {userName} highlight = {highlight} isFriend={true} key = {userName} _id = {_id} dispatch = {dispatch} />
                 )
             })}
             {loading && 

@@ -1,5 +1,5 @@
 // actions
-import { getMyFriends, searchForUsers, sendFriendRequest, getMyFriendRequests, withdrawFriendRequest, getMyInvites, acceptFriendRequest, rejectFriendRequest } from "../../Redux/Actions/FriendActions"
+import { getMyFriends, searchForUsers, sendFriendRequest, getMyFriendRequests, withdrawFriendRequest, getMyInvites, acceptFriendRequest, rejectFriendRequest, unFriend } from "../../Redux/Actions/FriendActions"
 export const getFriends = (dispatch, setLocalError) => {
     try {
         dispatch(getMyFriends());
@@ -67,6 +67,15 @@ export const acceptFriendRequestHandler = (dispatch, _id) => {
 export const rejectFriendRequestHandler = (dispatch, _id) => {
     try {
         dispatch(rejectFriendRequest({_id:_id}))
+    }
+    catch(e) {
+        console.log(e)
+    }
+}
+
+export const unFriendHandler = (dispatch, _id) => {
+    try {
+        dispatch(unFriend({_id: _id}));
     }
     catch(e) {
         console.log(e)

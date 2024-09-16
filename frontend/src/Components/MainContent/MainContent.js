@@ -16,11 +16,11 @@ const MainContent = () => {
             <ContentHeader />
             <div className = "mb-4 w-full">
                 {/* <Editor /> */}
-                {/* <FriendsContent /> */}
+                <FriendsContent />
                 {/* <Entries />   */}
                 {/* <SearchFriends /> */}
                 {/* <FriendsRequests /> */}
-                <Invites />
+                {/* <Invites /> */}
             </div>
             <ContentFooter />
         </section>
