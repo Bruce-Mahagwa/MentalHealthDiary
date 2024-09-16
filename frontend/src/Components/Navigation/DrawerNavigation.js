@@ -62,7 +62,7 @@ export function DrawerNavigation({isOpen, setIsOpen}) {
               </div>
             </Sidebar>
         </div>
-
+ 
         {/* drawer for small screens */}
         <div className = "md:hidden">
           <Drawer open={isOpen} onClose={handleClose} className="md:hidden">

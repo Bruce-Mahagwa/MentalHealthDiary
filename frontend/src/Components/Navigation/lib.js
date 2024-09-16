@@ -5,6 +5,7 @@ export const logout = (dispatch) => {
         dispatch(logoutUser());
     }
     catch(e) {
-     console.log(e);   
+     console.log(e); 
     }
 }
+

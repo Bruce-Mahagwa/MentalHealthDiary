@@ -1,10 +1,11 @@
   // dependencies
 import { createSlice } from '@reduxjs/toolkit';
-import { getMyFriends } from '../Actions/FriendActions';
+import { getMyFriends, searchForUsers } from '../Actions/FriendActions';
 
 // initial state
 const initialState = {
-    my_friends: [],
+    my_friends: {friends: [], loading: "", error: ""},
+    searched_users: {users: [], loading: "", error: ""},
     error: "",
     loading: ""
 }
@@ -15,15 +16,24 @@ const friendsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getMyFriends.pending, (state) => {
-            state.loading = true;
+            state.my_friends.loading = true;
         }).addCase(getMyFriends.rejected, (state,action) => {
-            state.loading = false;
-            state.error = action.payload;
+            state.my_friends.loading = false;
+            state.my_friends.error = action.payload;
         }).addCase(getMyFriends.fulfilled, (state, action) => {
             const {data} = action.payload;
+            state.my_friends.loading = false;
+            state.my_friends.friends = data.friends;
+        }).addCase(searchForUsers.pending, (state) => {
+            state.searched_users.loading = true;            
+        }).addCase(searchForUsers.rejected, (state, action) => {
+            state.searched_users.loading = false;
+            state.searched_users.error = action.payload;
+        }).addCase(searchForUsers.fulfilled, (state, action) => {
+            const {data} = action.payload
             console.log(data)
-            state.loading = false;
-            state.my_friends = data.friends;
+            state.searched_users.users = data;
+            state.searched_users.loading = false;
         })
     }
 })

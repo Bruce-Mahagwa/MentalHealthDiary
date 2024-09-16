@@ -13,3 +13,15 @@ export const getMyFriends = createAsyncThunk("/friends/fetchfriends", async (_, 
         }
     }
 })
+
+export const searchForUsers = createAsyncThunk("/friends/search", async ({name}, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.get(`/friends/search?name=${name}`);
+        return data;        
+    }
+    catch(e) {
+        if (e.reponse.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }
+    }
+})

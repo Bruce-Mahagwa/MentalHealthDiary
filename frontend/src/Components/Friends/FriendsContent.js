@@ -13,16 +13,16 @@ const FriendsContent = () => {
     useEffect(() => {
         getFriends(dispatch, setLocalError);
     }, [])
-    const {my_friends, loading, error} = useSelector(state => state.friends)
+    const {friends, loading, error} = useSelector(state => state.friends.my_friends)
     return (
         <div>
             {error && 
                 <Alert severity="error">{error}</Alert>
             }
-            {!loading && my_friends.length === 0 && 
+            {!loading && friends.length === 0 && 
                 <Alert>You haven't made any friends yet</Alert>
             }
-            {!loading && my_friends.map((friend) => {
+            {!loading && friends.map((friend) => {
                 const {userName, highlight} = friend;
                 return (
                     <SingleFriendRow userName = {userName} highlight = {highlight} isFriend={true} key = {userName} />

@@ -26,9 +26,10 @@ const INITIAL_STATE = {
         searched_entries: {}
     },
     friends: {
-        my_friends: [],
+        my_friends: {friends: [], loading: "", error: ""},
+        searched_users: {users: [], loading: "", error: ""},
         error: "",
-        loading: ""
+        loading: ""        
     }
 }
 
