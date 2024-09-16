@@ -24,7 +24,7 @@ const Register = ({openModalRegister, setOpenModalRegister}) => {
         // when user presses the enter key
         e.preventDefault()
         if (e.key === "Enter") {
-          return handleRegister();
+          return handleRegister(dispatch, setLocalError, userName, email, password)
         }
     }
 
@@ -36,6 +36,14 @@ const Register = ({openModalRegister, setOpenModalRegister}) => {
             <Modal show={openModalRegister} onClose={() => setOpenModalRegister(false)} dismissible>
                 <Modal.Header>Register</Modal.Header>  
                 <Modal.Body>
+                    <div>
+                        {localError && 
+                        <Alert severity="error">{localError}</Alert>
+                        }
+                        {error && 
+                            <Alert severity="error">{error}</Alert>
+                        }
+                    </div>
                     <form className="flex max-w-md flex-col gap-4 mx-auto mt-8">
                         <div>
                             <div className="mb-2 block">

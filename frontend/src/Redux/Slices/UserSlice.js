@@ -1,6 +1,6 @@
 // dependencies
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, logoutUser } from '../Actions/UserActions';
+import { registerUser, logoutUser, loginUser } from '../Actions/UserActions';
 
 // initial state
 const initialState = {
@@ -19,16 +19,23 @@ const userSlice = createSlice({
             state.loading = true;           
         }).addCase(registerUser.rejected, (state, action) => {
             state.error = action.payload;
-            console.log(state.error)
             state.loading = false;
         }).addCase(registerUser.fulfilled, (state, action) => {
             const {data} = action.payload.data;
-            console.log(data)
             state.user = data;
             state.loading = false;
         }).addCase(logoutUser.fulfilled, (state) => {
             state.user = {};
             state.userProfile = {}
+        }).addCase(loginUser.fulfilled, (state, action) => {
+            const {data} = action.payload.data;
+            state.user = data;
+            state.loading = false;
+        }).addCase(loginUser.pending, (state) => {
+            state.loading = true;           
+        }).addCase(loginUser.rejected, (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
         })
     }
 })
