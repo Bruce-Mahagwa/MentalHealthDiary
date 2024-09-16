@@ -62,3 +62,38 @@ export const withdrawFriendRequest = createAsyncThunk('/friends/widthdraw', asyn
     }
 })
 
+export const getMyInvites = createAsyncThunk("/friends/invites", async (_, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.get("/friends/requests");
+        return data;
+    }
+    catch(e) {
+        if (e.response.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }
+    }
+})
+
+export const acceptFriendRequest = createAsyncThunk("/friends/accept_friend", async ({_id}, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.post(`/friends/accept_request/${_id}`)
+        return data;
+    }
+    catch(e) {
+        if (e.response.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }
+    }
+})
+
+export const rejectFriendRequest = createAsyncThunk("/friends/reject_friend", async ({_id}, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.post(`/friends/reject_request/${_id}`)
+        return data;
+    }
+    catch(e) {
+        if (e.response.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }
+    }
+})

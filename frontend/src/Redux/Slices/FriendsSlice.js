@@ -1,6 +1,6 @@
   // dependencies
 import { createSlice } from '@reduxjs/toolkit';
-import { getMyFriends, searchForUsers, sendFriendRequest, getMyFriendRequests, withdrawFriendRequest } from '../Actions/FriendActions';
+import { getMyFriends, searchForUsers, sendFriendRequest, getMyFriendRequests, withdrawFriendRequest, getMyInvites } from '../Actions/FriendActions';
 
 // initial state
 const initialState = {
@@ -9,6 +9,7 @@ const initialState = {
     friend_request_status: {message: "", error: "", loading: ""},
     friend_requests: {requests: [], loading: "", error: ""},
     withdraw_request_status: {message: "", error: "", loading: ""},
+    invites: {invites: [], loading: "", error: ""},
     error: "",
     loading: ""
 }
@@ -63,6 +64,15 @@ const friendsSlice = createSlice({
             const {message} = action.payload;
             state.withdraw_request_status.loading = false;
             state.withdraw_request_status.message = message;
+        }).addCase(getMyInvites.pending, (state) => {
+            state.invites.loading = true;
+        }).addCase(getMyInvites.rejected, (state, action) => {
+            state.invites.error = action.payload;
+            state.invites.loading = false;
+        }).addCase(getMyInvites.fulfilled, (state, action) => {
+            const {data} = action.payload;
+            state.invites.loading = false;
+            state.invites.invites = data.friend_requests;
         })
     }
 })

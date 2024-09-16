@@ -31,6 +31,7 @@ const INITIAL_STATE = {
         friend_request_status: {message: "", error: "", loading: ""},
         friend_requests: {requests: [], loading: "", error: ""},
         withdraw_request_status: {message: "", error: "", loading: ""},
+        invites: {invites: [], loading: "", error: ""},
         error: "",
         loading: ""        
     }

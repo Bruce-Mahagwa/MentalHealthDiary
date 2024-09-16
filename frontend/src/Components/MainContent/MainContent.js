@@ -6,6 +6,7 @@ import FriendsContent from "../Friends/FriendsContent";
 import Entries from "../Entries/Entries";
 import SearchFriends from "../Friends/SearchFriends";
 import FriendsRequests from "../Friends/FriendRequests";
+import Invites from "../Friends/Invites";
 // dependencies
 import { useState } from "react";
 const MainContent = () => {
@@ -18,7 +19,8 @@ const MainContent = () => {
                 {/* <FriendsContent /> */}
                 {/* <Entries />   */}
                 {/* <SearchFriends /> */}
-                <FriendsRequests />
+                {/* <FriendsRequests /> */}
+                <Invites />
             </div>
             <ContentFooter />
         </section>

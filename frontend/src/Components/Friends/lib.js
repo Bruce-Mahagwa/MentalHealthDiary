@@ -1,5 +1,5 @@
 // actions
-import { getMyFriends, searchForUsers, sendFriendRequest, getMyFriendRequests, withdrawFriendRequest } from "../../Redux/Actions/FriendActions"
+import { getMyFriends, searchForUsers, sendFriendRequest, getMyFriendRequests, withdrawFriendRequest, getMyInvites, acceptFriendRequest, rejectFriendRequest } from "../../Redux/Actions/FriendActions"
 export const getFriends = (dispatch, setLocalError) => {
     try {
         dispatch(getMyFriends());
@@ -29,7 +29,7 @@ export const sendAFriendRequest = (dispatch, _id) => {
 }
 
 export const getMyFriendRequestsHandler = (dispatch, setLocalError) => {
-    try {
+    try {  
         dispatch(getMyFriendRequests())
     }
     catch(e) {
@@ -43,5 +43,32 @@ export const withdrawFriendRequestHandler = (dispatch, _id) => {
     }
     catch(e) {
         console.log(e);
+    }
+}
+
+export const getMyInvitesHandler = (dispatch, setLocalError) => {
+    try {
+        dispatch(getMyInvites());
+    }
+    catch(e) {
+        setLocalError("There had been a local error. Please reload the page.")
+    }
+}
+
+export const acceptFriendRequestHandler = (dispatch, _id) => {
+    try {
+        dispatch(acceptFriendRequest({_id: _id}))
+    }
+    catch(e) {
+        console.log(e)
+    }
+}
+
+export const rejectFriendRequestHandler = (dispatch, _id) => {
+    try {
+        dispatch(rejectFriendRequest({_id:_id}))
+    }
+    catch(e) {
+        console.log(e)
     }
 }
