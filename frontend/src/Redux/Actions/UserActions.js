@@ -1,7 +1,6 @@
 // dependencies
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {Navigate} from "react-router-dom"
 
 export const registerUser = createAsyncThunk("users/register", async ({ userName, email, password }, { rejectWithValue }) => {
     try {

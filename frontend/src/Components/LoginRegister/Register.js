@@ -1,6 +1,6 @@
 // dependencies
 import { Button, Label, TextInput, Modal, Spinner } from "flowbite-react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Alert from '@mui/material/Alert';
 
@@ -8,24 +8,18 @@ import Alert from '@mui/material/Alert';
 import { handleRegister } from "./lib";
 
 const Register = ({openModalRegister, setOpenModalRegister}) => {
-    const userNameRef = useRef();
-    const emailRef = useRef();
-    const passwordRef = useRef();
+    const [userName, setUserName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("");
     const [localError, setLocalError] = useState("");
-    const userName = userNameRef.current?.value;
-    const email = emailRef.current?.value;
-    const password = passwordRef.current?.value;
     const dispatch = useDispatch();
     const user = useSelector(state => state.users);
     // state
     const {loading, error} = user;
 
-    const handleRegisterKeyDown = (e) => {
-        // when user presses the enter key
-        e.preventDefault()
-        if (e.key === "Enter") {
-          return handleRegister(dispatch, setLocalError, userName, email, password)
-        }
+    const handleRegisterEvent = (e) => {
+        e.preventDefault();
+        return handleRegister(dispatch, setLocalError, userName, email, password)
     }
 
     return (
@@ -55,22 +49,26 @@ const Register = ({openModalRegister, setOpenModalRegister}) => {
                                 Does not have to be a real email.
                                 </>
                             }
-                            ref = {emailRef}
+                            onChange = {(e) => setEmail(e.currentTarget.value)}
                             />
                         </div>
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="username" value="Your userName" />
                             </div>
-                            <TextInput id="username" type="text" required shadow ref = {userNameRef} />
+                            <TextInput id="username" type="text" required shadow 
+                            onChange = {(e) => setUserName(e.currentTarget.value)}
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="password" value="Your password" />
                             </div>
-                            <TextInput id="password" type="password" required shadow ref = {passwordRef} />
+                            <TextInput id="password" type="password" required shadow 
+                            onChange = {(e) => setPassword(e.currentTarget.value)}
+                             />
                         </div>                    
-                        {!loading && <Button type="submit" className = "text-black" onKeyDown={handleRegisterKeyDown} onClick = {(e) => {e.preventDefault(); handleRegister(dispatch, setLocalError, userName, email, password)}}>Register new account</Button>}
+                        {!loading && <Button type="submit" className = "text-black" onClick = {handleRegisterEvent}>Register new account</Button>}
                         {loading && <Button type="submit" disabled className = "text-black">
                             <Spinner aria-label="Spinner button example" size="sm" />
                             <span className="pl-3">Loading...</span>    

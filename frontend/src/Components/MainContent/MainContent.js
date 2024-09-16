@@ -10,8 +10,8 @@ const MainContent = () => {
             <ContentHeader />
             <div className = "mb-4">
                 {/* <Editor /> */}
-                {/* <FriendsContent /> */}
-                <Entries />  
+                <FriendsContent />
+                {/* <Entries />   */}
             </div>
             <ContentFooter />
         </section>
