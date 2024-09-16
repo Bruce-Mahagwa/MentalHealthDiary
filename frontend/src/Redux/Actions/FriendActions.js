@@ -25,3 +25,40 @@ export const searchForUsers = createAsyncThunk("/friends/search", async ({name},
         }
     }
 })
+
+export const sendFriendRequest = createAsyncThunk("/friends/request", async ({_id}, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.post(`/friends/request/${_id}`)
+        return data;
+    } 
+    catch(e) {
+        if (e.response.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }
+    }
+})
+
+export const getMyFriendRequests = createAsyncThunk("/friends/requests_sent", async (_, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.get("/friends/requests_sent")
+        return data;
+    }
+    catch(e) {
+        if (e.response.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }      
+    }
+})
+
+export const withdrawFriendRequest = createAsyncThunk('/friends/widthdraw', async({_id}, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.post(`/friends/delete_request/${_id}`);
+        return data;
+    }
+    catch(e) {
+        if (e.response.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }
+    }
+})
+

@@ -20,13 +20,20 @@ const SearchFriends = () => {
         searchUsers(dispatch, setLocalError, searchQuery);
     }
 
-    const {users, loading, error} = useSelector(state => state.friends.searched_users)
+    const {users, loading, error} = useSelector(state => state.friends.searched_users) 
+
+    // state for user who are not friends
+    
+    const {friend_request_status} = useSelector(state => state.friends);
+    const loading_request = friend_request_status.loading;
+    const message_request = friend_request_status.message;
+    const error_request = friend_request_status.error;
 
     return (
         <div>
             {/* start of navigation for search */}
-            {<nav className = "flex gap-2 flex-wrap md:gap-4 justify-center items-center">
-                <TextInput type = "text" className = "w-3/4" onChange = {(e) => setSearchQuery(e.currentTarget.value)}/> 
+            {<nav className = "flex gap-2 flex-wrap md:gap-4 justify-center items-center mb-4 w-full">
+                <TextInput type = "text" className = "w-4/5" onChange = {(e) => setSearchQuery(e.currentTarget.value)}/> 
                 <FaSearch className = "cursor-pointer" onClick={handleSearch}/>
             </nav>}
             {/* end of navigation for search */}
@@ -34,9 +41,14 @@ const SearchFriends = () => {
                 <Alert severity="error">{error}</Alert>
             }
             {!loading && users.map((friend) => {
-                const {userName, highlight} = friend;
+                const {userName, highlight, _id} = friend;
                 return (
-                    <SingleFriendRow userName = {userName} highlight = {highlight} isNotFriend={true} key = {userName} />
+                    <SingleFriendRow userName = {userName} highlight = {highlight} isNotFriend={true} key = {userName} _id= {_id} 
+                    loading_request={loading_request}
+                    message_request={message_request}
+                    error_request={error_request}
+                    dispatch={dispatch}
+                    />
                 )
             })}
             {loading && 
