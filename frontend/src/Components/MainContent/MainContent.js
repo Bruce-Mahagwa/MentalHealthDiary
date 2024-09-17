@@ -15,8 +15,8 @@ const MainContent = () => {
         <section className = "flex flex-col items-center max-h-screen overflow-y-scroll w-full md:w-2/3 lg:w-4/5">
             <ContentHeader />
             <div className = "mb-4 w-full">
-                {/* <Editor /> */}
-                <FriendsContent />
+                <Editor />
+                {/* <FriendsContent /> */}
                 {/* <Entries />   */}
                 {/* <SearchFriends /> */}
                 {/* <FriendsRequests /> */}

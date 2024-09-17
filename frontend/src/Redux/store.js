@@ -17,13 +17,10 @@ const INITIAL_STATE = {
       loading: false
     },
     diary: {
-        error: {},
-        loading: false,
-        new_entry: {},
-        edited_entry: {},
-        my_entries: {},
-        tagged_entries: {},
-        searched_entries: {}
+        new_entry: {entry: "", loading: "", error: ""},
+        my_entries: {entries: [], loading: "", error: ""},
+        tagged_entries: {entries: [], loading: "", error: ""},
+        searched_entries: {entries: [], loading: "", error: ""}
     },
     friends: {
         my_friends: {friends: [], loading: "", error: ""},

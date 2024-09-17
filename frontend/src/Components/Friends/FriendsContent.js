@@ -9,7 +9,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { Alert } from "@mui/material";
 const FriendsContent = () => { 
     const [localError, setLocalError] = useState("")
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
 
     useEffect(() => {
         getFriends(dispatch, setLocalError);

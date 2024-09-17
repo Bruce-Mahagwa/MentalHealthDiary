@@ -1,6 +1,6 @@
 // dependencies
 import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit"; 
 
 export const makeDiaryEntry = createAsyncThunk("/diary/add", async ({entry, tags}, {rejectWithValue}) => {
     try {
@@ -13,3 +13,4 @@ export const makeDiaryEntry = createAsyncThunk("/diary/add", async ({entry, tags
         }
     }
 })
+
