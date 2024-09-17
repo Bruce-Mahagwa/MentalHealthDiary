@@ -7,6 +7,7 @@ import Entries from "../Entries/Entries";
 import SearchFriends from "../Friends/SearchFriends";
 import FriendsRequests from "../Friends/FriendRequests";
 import Invites from "../Friends/Invites";
+import TaggedEntries from "../Entries/TaggedEntries";
 // dependencies
 import { useState } from "react";
 const MainContent = () => {
@@ -15,14 +16,15 @@ const MainContent = () => {
         <section className = "flex flex-col items-center max-h-screen overflow-y-scroll w-full md:w-2/3 lg:w-4/5">
             <ContentHeader />
             <div className = "mb-4 w-full">
-                <Editor />
+                {/* <Editor /> */}
                 {/* <FriendsContent /> */}
                 {/* <Entries />   */}
+                <TaggedEntries />
                 {/* <SearchFriends /> */}
                 {/* <FriendsRequests /> */}
                 {/* <Invites /> */}
             </div>
-            <ContentFooter />
+            {/* <ContentFooter /> */}
         </section>
     )
 }

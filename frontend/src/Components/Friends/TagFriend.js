@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // functions
 import { getFriends } from "./lib";
 import TagFriendRow from "./TagFriendRow";
-const TagFriend = ({setTags, tags}) => {
+const TagFriend = ({setTags, tags, openModal, setOpenModal}) => {
     const [localError, setLocalError] = useState("")  
     const dispatch = useDispatch(); 
 
@@ -14,7 +14,6 @@ const TagFriend = ({setTags, tags}) => {
     }, [])
 
     const {friends, loading, error} = useSelector(state => state.friends.my_friends)
-    const [openModal, setOpenModal] = useState(true);
 
     return (
         <div>            

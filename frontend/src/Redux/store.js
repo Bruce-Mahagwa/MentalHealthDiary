@@ -20,7 +20,7 @@ const INITIAL_STATE = {
         new_entry: {entry: "", loading: "", error: ""},
         my_entries: {entries: [], loading: "", error: ""},
         tagged_entries: {entries: [], loading: "", error: ""},
-        searched_entries: {entries: [], loading: "", error: ""}
+        latest_entries: {entries: [], loading: "", error: ""}
     },
     friends: {
         my_friends: {friends: [], loading: "", error: ""},
