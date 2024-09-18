@@ -6,8 +6,9 @@ import { IoIosJournal } from "react-icons/io";
 import { HiUsers } from "react-icons/hi";
 import { FcAbout } from "react-icons/fc";
 
-export function DrawerNavigation({isOpen, setIsOpen}) {
-  const handleClose = () => setIsOpen(false);
+export function DrawerNavigation({isOpenMenu, setIsOpenMenu}) {
+  const handleClose = () => setIsOpenMenu(false); // closes drawer navigation
+
   return (
     <>
         <div className = "hidden md:block max-h-screen overflow-y-scroll">
@@ -65,8 +66,8 @@ export function DrawerNavigation({isOpen, setIsOpen}) {
  
         {/* drawer for small screens */}
         <div className = "md:hidden">
-          <Drawer open={isOpen} onClose={handleClose} className="md:hidden">
-          <Drawer.Header title="MENU" titleIcon={() => <></>} />
+          <Drawer open={isOpenMenu} onClose={handleClose} className="md:hidden">
+          <Drawer.Header title="MENU" />
           <Drawer.Items>
             <Sidebar
               aria-label="Sidebar with multi-level dropdown example"

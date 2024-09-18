@@ -7,6 +7,7 @@ import Entries from "../Entries/Entries";
 import SearchFriends from "../Friends/SearchFriends";
 import FriendsRequests from "../Friends/FriendRequests";
 import Invites from "../Friends/Invites";
+import MyEntries from "../Entries/MyEntries";
 import TaggedEntries from "../Entries/TaggedEntries";
 // dependencies
 import { useState } from "react";
@@ -19,7 +20,8 @@ const MainContent = () => {
                 {/* <Editor /> */}
                 {/* <FriendsContent /> */}
                 {/* <Entries />   */}
-                <TaggedEntries />
+                {/* <TaggedEntries /> */}
+                <MyEntries />
                 {/* <SearchFriends /> */}
                 {/* <FriendsRequests /> */}
                 {/* <Invites /> */}

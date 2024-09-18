@@ -58,7 +58,7 @@ const Login = ({openModalLogin, setOpenModalLogin}) => {
                     </Button>}
                 </form>
             </Modal.Body>
-        </Modal>
+        </Modal> 
         </>
     )
 }

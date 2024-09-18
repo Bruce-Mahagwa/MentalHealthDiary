@@ -5,16 +5,15 @@ import DrawerNavigation from "../Navigation/DrawerNavigation";
 import MainContent from "../MainContent/MainContent";
 // dependencies
 import { useState } from "react";
-import { useSelector } from "react-redux";  
 const Home = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpenMenu, setIsOpenMenu] = useState(true); //toggles drawer navigation for small screens
      
     return ( 
         <>
             <main id = "main" className = "w-full min-h-screen overflow-y-hidden">
-                <NavigationLoggedIn setIsOpen={setIsOpen} />
+                <NavigationLoggedIn setIsOpenMenu={setIsOpenMenu} />
                 <div className = "flex">
-                    <DrawerNavigation isOpen={isOpen} setIsOpen={setIsOpen}/>
+                    <DrawerNavigation isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu}/>
                     <MainContent />
                 </div>
             </main>

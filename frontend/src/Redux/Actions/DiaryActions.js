@@ -37,3 +37,15 @@ export const getTaggedEntries = createAsyncThunk("/diary/tagged", async (_, {rej
         }
     }
 })
+
+export const getEntries = createAsyncThunk("/diary/entries", async ({start, end}, {rejectWithValue}) => {
+    try {
+        const {data} = await axios.get(`/diary/entries?start=${start}&end=${end}`);
+        return data;
+    }
+    catch(e) {
+        if (e.reponse.data.error) {
+            return rejectWithValue(e.response.data.error);
+        }
+    }
+})

@@ -50,3 +50,26 @@ export const registerUser = createAsyncThunk("users/register", async ({ userName
     }
   })
   
+  export const fetchProfile = createAsyncThunk("/user", async (_, {rejectWithValue}) => {
+    try {
+      const {data} = await axios.get("/users/user");
+      return data;
+    }
+    catch(e) {
+      if (e.response.data.error) {
+        return rejectWithValue(e.response.data.error);
+      }
+    }
+  })
+
+  export const saveUserProfile = createAsyncThunk("/user/save", async ({firstName, lastName, highlight}, {rejectWithValue}) => {
+    try {
+      const {data} = await axios.post("/users/user", {firstName: firstName, highlight: highlight, lastName: lastName})
+      return data;
+    }
+    catch(e) {
+      if (e.response.data.error) {
+        return rejectWithValue(e.response.data.error);
+      }
+    }
+  })

@@ -11,27 +11,7 @@ const ContentHeader = ({write_post, search_users=true, my_entries}) => {
             {write_post && <h3 className = "text-center">Write Posts</h3>}
             {search_users && <h3 className = "text-center">Search Users</h3>}
             {/* navigation for my entries which included filter options */}
-            {my_entries && <nav className = "flex gap-2 flex-wrap md:gap-4 justify-center items-center">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        slotProps={{
-                        textField: {
-                            helperText: 'FROM',
-                        },
-                        }}
-                    />
-                </LocalizationProvider>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        slotProps={{
-                        textField: {
-                            helperText: 'TO',
-                        },
-                        }}
-                    />
-                </LocalizationProvider>
-                <Button color = "success" className = "h-max">Filter Entries</Button>
-            </nav>}
+            {/* {my_entries && } */}
             {/* end of navigation for my entries */}
 
         </header>

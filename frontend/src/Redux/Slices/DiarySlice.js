@@ -1,6 +1,6 @@
 // dependencies
 import { createSlice } from '@reduxjs/toolkit';
-import { makeDiaryEntry, getLatestEntries, getTaggedEntries } from '../Actions/DiaryActions';
+import { makeDiaryEntry, getLatestEntries, getTaggedEntries, getEntries } from '../Actions/DiaryActions';
 
 // initial state
 const initialState = {
@@ -41,6 +41,15 @@ const diarySlice = createSlice({
             const {data} = action.payload;
             state.tagged_entries.loading = false;
             state.tagged_entries.entries = data;
+        }).addCase(getEntries.pending, (state) => {
+            state.my_entries.loading = true;
+        }).addCase(getEntries.rejected, (state, action) => {
+            state.my_entries.loading = false;
+            state.my_entries.error = action.payload;
+        }).addCase(getEntries.fulfilled, (state, action) => {
+            const {data} = action.payload;
+            state.my_entries.loading = false;
+            state.my_entries.entries = data;
         })
     }
 })
