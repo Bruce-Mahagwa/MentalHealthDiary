@@ -4,13 +4,12 @@ import Loading from "../Loading/Loading";
 // functions
 import { handleMyEntries } from "./lib";
 // dependencies
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Button, TextInput } from 'flowbite-react';
-import { FaSearch } from "react-icons/fa";
 import dayjs from 'dayjs';
 import { Alert } from "flowbite-react";
 

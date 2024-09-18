@@ -1,6 +1,5 @@
 // files
 import SingleEntry from "./SingleEntry";
-import Reader from "../Reader/Reader";
 import Loading from "../Loading/Loading";
 // functions
 import { handleLatestEntries } from "./lib";
@@ -13,6 +12,7 @@ const Entries = () => {
     const dispatch = useDispatch();
     const {entries, loading, error} = useSelector(state => state.diary.latest_entries);
     const [localError, setLocalError] = useState("")
+
     useEffect(() => {
         handleLatestEntries(dispatch, setLocalError)
     }, [])
@@ -30,7 +30,9 @@ const Entries = () => {
                 {localError && <Alert color="failure" onDismiss={() => {}}>
                     <span className="font-medium">Latest posts</span> {localError}
                 </Alert>}
-
+                {!loading && entries.length === 0 && <Alert color="success" onDismiss={() => {}}>
+                    <span className="font-medium">Please make a post first</span> 
+                </Alert>}
                 {entries.map((item) => {
                     const {entry, createdAt, _id} = item;
                     return (

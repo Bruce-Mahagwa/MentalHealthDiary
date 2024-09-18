@@ -19,9 +19,7 @@ const diarySlice = createSlice({
             state.new_entry.loading = true;
         }).addCase(makeDiaryEntry.rejected, (state, action) => {
             state.new_entry.loading = false;
-            state.new_entry.error = action.payload;
-            // clear state
-            state.new_entry.entry = {}
+            state.new_entry.error = action.payload;            
         }).addCase(makeDiaryEntry.fulfilled, (state, action) => {
             const {data} = action.payload; 
             state.new_entry.entry = data; 
@@ -29,12 +27,10 @@ const diarySlice = createSlice({
             // clear error
             state.new_entry.error = ""
         }).addCase(getLatestEntries.pending, (state) => {
-            state.latest_entries.loading = true;
+            state.latest_entries.loading = true;            
         }).addCase(getLatestEntries.rejected, (state, action) => {
             state.latest_entries.loading = false;
-            state.latest_entries.error = action.payload;
-            // clear state
-            state.latest_entries.entries = []
+            state.latest_entries.error = action.payload;            
         }).addCase(getLatestEntries.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.latest_entries.loading = false;
@@ -42,27 +38,25 @@ const diarySlice = createSlice({
             // clear state
             state.latest_entries.error = "";
         }).addCase(getTaggedEntries.pending, (state) => {
-            state.tagged_entries.loading = true;
+            state.tagged_entries.loading = true; 
         }).addCase(getTaggedEntries.rejected, (state, action) => {
             state.tagged_entries.loading = false;
-            state.tagged_entries.error = action.payload;
+            state.tagged_entries.error = action.payload;            
         }).addCase(getTaggedEntries.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.tagged_entries.loading = false;
             state.tagged_entries.entries = data;
+            // clear state
+            state.tagged_entries.error = ""
         }).addCase(getEntries.pending, (state) => {
             state.my_entries.loading = true;
         }).addCase(getEntries.rejected, (state, action) => {
             state.my_entries.loading = false;
-            state.my_entries.error = action.payload;
-            // clear state
-            state.my_entries.entries = []
+            state.my_entries.error = action.payload;            
         }).addCase(getEntries.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.my_entries.loading = false;
-            state.my_entries.entries = data.diary_entries;
-            // clear state
-            state.my_entries.error = ""
+            state.my_entries.entries = data.diary_entries;           
         })
     }
 })

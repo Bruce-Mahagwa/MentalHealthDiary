@@ -20,8 +20,8 @@ const MainContent = () => {
                 {/* <FriendsContent /> */}
                 {/* <Entries />   */}
                 {/* <TaggedEntries /> */}
-                <MyEntries />
-                {/* <SearchFriends /> */}
+                {/* <MyEntries /> */}
+                <SearchFriends />
                 {/* <FriendsRequests /> */}
                 {/* <Invites /> */}
             </div>

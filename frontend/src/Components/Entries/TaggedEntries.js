@@ -1,30 +1,47 @@
 // files
 import SingleEntry from "./SingleEntry";
-import Reader from "../Reader/Reader";
+import Loading from "../Loading/Loading";
+
 // functions
 import { handleTaggedEntries } from "./lib";
 // dependencies
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux"
+import { Alert } from "flowbite-react";
+
 const TaggedEntries = () => {
     const dispatch = useDispatch();
     const {entries, loading, error} = useSelector(state => state.diary.tagged_entries);
     const [localError, setLocalError] = useState("")
+
     useEffect(() => {
         handleTaggedEntries(dispatch, setLocalError)
     }, [])
+
     return (
         <>
-        <div className = "flex flex-wrap gap-4 w-full justify-center">
+        <header className = "mb-4 mx-auto w-max text-center pt-4">
+            <h3>Tagged Posts</h3>
+        </header>
+        <div className = "flex flex-wrap gap-4 w-full justify-center pt-4 pb-8">
+            {loading && <Loading />}
+            {error && <Alert color="failure" onDismiss={() => {}}>
+                <span className="font-medium">Tagged posts:</span> {error}
+            </Alert>}
+            {localError && <Alert color="failure" onDismiss={() => {}}>
+                <span className="font-medium">Tagged posts</span> {localError}
+            </Alert>}
+            {!loading && entries.length === 0 && <Alert color="success" onDismiss={() => {}}>
+                <span className="font-medium">You have not been tagged in any post yet</span> 
+            </Alert>}
             {entries.map((item) => {
-                const {entry, createdAt} = item;
+                const {entry, createdAt, _id} = item;
                 const {userName} = item.owner
                 return (
-                    <SingleEntry entry = {entry} createdAt={createdAt} userName = {userName} />
+                    <SingleEntry entry = {entry} createdAt={createdAt} userName = {userName} key = {_id} />
                 )
             })}
         </div>
-        <Reader />
         </>
     )
 }

@@ -12,6 +12,7 @@ const SingleEntry = ({entry, createdAt, userName}) => {
     const weekday = date.toLocaleString('default', { weekday: 'long' });
     const day = date.getDate()
     const time = `${date.getFullYear()}, ${month}, ${weekday}, ${day}`
+    
     return ( 
         <>
             <Card className="max-w-sm cursor-pointer" onClick = {() => setOpenReaderModal(true)}>

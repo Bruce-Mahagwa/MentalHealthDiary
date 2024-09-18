@@ -38,7 +38,7 @@ const SingleFriendRow = ({isFriend, isInvite, isRequest, isNotFriend, userName, 
         unFriendHandler(dispatch, _id)
     }
     return (  
-        <div className = "flex justify-between w-full  border-gray-400 border-1 align-middle p-2 sm:p-4">
+        <div className = "flex justify-between flex-wrap w-full border-gray-400 border-1 align-middle p-2 sm:p-4 lg:w-3/4 lg:mx-auto xl:w-1/2">
             <p className = "font-bold">{userName}</p>
             <p>{highlight}</p>
             {isRequest && <Button color = "dark" className = "px-4" onClick={withdrawRequest}>Withdraw</Button>}

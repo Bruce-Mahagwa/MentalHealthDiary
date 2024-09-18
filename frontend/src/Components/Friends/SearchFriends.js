@@ -28,9 +28,13 @@ const SearchFriends = () => {
     const loading_request = friend_request_status.loading;
     const message_request = friend_request_status.message;
     const error_request = friend_request_status.error;
-
     return (
-        <div>
+        <>
+        <header className = "mb-2 mx-auto w-max text-center pt-4">
+            <h3>Search Users</h3>
+            <p>You can only search for users that are not your friends</p>
+        </header>
+        <div className = "py-8">
             {/* start of navigation for search */}
             {<nav className = "flex gap-2 flex-wrap md:gap-4 justify-center items-center mb-4 w-full">
                 <TextInput type = "text" className = "w-4/5" onChange = {(e) => setSearchQuery(e.currentTarget.value)}/> 
@@ -40,9 +44,16 @@ const SearchFriends = () => {
             {error && 
                 <Alert severity="error">{error}</Alert>
             }
+            {localError && 
+                <Alert severity="error">{localError}</Alert>
+            }
+            {loading && 
+                <div className = "flex justify-center items-center">
+                    <Loading />
+                </div>}
             {!loading && users.map((friend) => {
                 const {userName, highlight, _id} = friend;
-                return (
+                return ( 
                     <SingleFriendRow userName = {userName} highlight = {highlight} isNotFriend={true} key = {userName} _id= {_id} 
                     loading_request={loading_request}
                     message_request={message_request}
@@ -50,14 +61,9 @@ const SearchFriends = () => {
                     dispatch={dispatch}
                     />
                 )
-            })}
-            {loading && 
-            <div className = "flex justify-center items-center">
-                <Loading />
-            </div>
-            }
+            })}            
         </div>
-        
+        </>
     )
 }
 export default SearchFriends;
