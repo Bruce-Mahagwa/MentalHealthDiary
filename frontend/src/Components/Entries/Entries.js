@@ -33,7 +33,7 @@ const Entries = () => {
                 {!loading && entries.length === 0 && <Alert color="success" onDismiss={() => {}}>
                     <span className="font-medium">Please make a post first</span> 
                 </Alert>}
-                {entries.map((item) => {
+                {!loading && entries.map((item) => {
                     const {entry, createdAt, _id} = item;
                     return (
                         <SingleEntry entry = {entry} createdAt={createdAt} key = {_id} />

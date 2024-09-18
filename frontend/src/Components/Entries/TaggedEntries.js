@@ -34,7 +34,7 @@ const TaggedEntries = () => {
             {!loading && entries.length === 0 && <Alert color="success" onDismiss={() => {}}>
                 <span className="font-medium">You have not been tagged in any post yet</span> 
             </Alert>}
-            {entries.map((item) => {
+            {!loading && entries.map((item) => {
                 const {entry, createdAt, _id} = item;
                 const {userName} = item.owner
                 return (

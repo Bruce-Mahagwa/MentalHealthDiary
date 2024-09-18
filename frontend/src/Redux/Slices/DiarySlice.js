@@ -34,7 +34,7 @@ const diarySlice = createSlice({
         }).addCase(getLatestEntries.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.latest_entries.loading = false;
-            state.latest_entries.entries = data;
+            state.latest_entries.entries = data
             // clear state
             state.latest_entries.error = "";
         }).addCase(getTaggedEntries.pending, (state) => {

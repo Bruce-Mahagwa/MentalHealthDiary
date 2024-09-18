@@ -1,0 +1,6 @@
+#logo {
+    background: url("../../assets/images/landing_small.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
