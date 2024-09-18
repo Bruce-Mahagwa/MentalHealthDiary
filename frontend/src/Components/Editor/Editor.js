@@ -25,10 +25,9 @@ const Editor = () => {
     const weekday = today.toLocaleString('default', { weekday: 'long' });
     const date = today.getDate()
     const day = `${today.getFullYear()}, ${month}, ${weekday}, ${date}`
-    console.log(entry.entry, error)
     return ( 
     <>  
-     <div className = "w-full lg:mx-auto lg:w-4/5">
+     <div className = "w-full lg:mx-auto lg:w-4/5 py-4">
         <header className = "mb-4 mx-auto w-max text-center pt-4">
             <h3>Write Entry</h3>
             <date>{day} </date>

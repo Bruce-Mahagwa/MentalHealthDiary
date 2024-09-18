@@ -16,16 +16,15 @@ const MainContent = () => {
     return (
         <section className = "max-h-screen overflow-y-scroll mx-auto w-full mt-4 md:mt-8 lg:w-4/5">
             <div className = "w-full mx-auto">
-                <Editor />
+                {/* <Editor /> */}
                 {/* <FriendsContent /> */}
-                {/* <Entries />   */}
+                <Entries />  
                 {/* <TaggedEntries /> */}
                 {/* <MyEntries /> */}
                 {/* <SearchFriends /> */}
                 {/* <FriendsRequests /> */}
                 {/* <Invites /> */}
             </div>
-            {/* <ContentFooter /> */}
         </section>
     )
 }

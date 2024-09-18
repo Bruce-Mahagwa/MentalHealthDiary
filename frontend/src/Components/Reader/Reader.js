@@ -2,39 +2,15 @@
 import { Modal } from "flowbite-react";
 import { Paper } from "@mui/material";
 
-const Reader = () => {
+const Reader = ({entry, time, userName, openReaderModal, setOpenReaderModal}) => {
     return (
-        <Modal show = {false}>
+        <Modal show = {openReaderModal} onClose={() => setOpenReaderModal(false)}>
             <Modal.Header>
-                BruceM - Tuesday/12/2024
+                {userName}  {time}
             </Modal.Header>
             <Modal.Body>
-                <Paper elevation={24} className = "w-full" square = {false}>
-                    loremloremloremloremloremloremloremloremloremloremloremlorem                     
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem                     
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem                     
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem                     
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem                     
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem                     
-                    loremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremloremloremlorem
-                    loremloremloremloremloremloremloremloremloremlorem
+                <Paper elevation={24} className = "w-full p-4" square = {false} >
+                    {entry}
                 </Paper>
             </Modal.Body>
         </Modal>
