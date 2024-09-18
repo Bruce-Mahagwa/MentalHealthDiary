@@ -19,7 +19,6 @@ const Profile = ({openProfileModal, setOpenProfileModal}) => {
     // state
     const {userProfile, loading, error} = user;
     const updateProfile = (e) => {
-        // when user presses the enter key
         e.preventDefault()
         handleProfileUpdate(dispatch, setLocalError, firstName, lastName, highlight)
     }
@@ -28,6 +27,7 @@ const Profile = ({openProfileModal, setOpenProfileModal}) => {
             handleFetchProfile(dispatch, setLocalError); 
         }
     }, [openProfileModal])
+
     return ( 
         <>        
         <Modal show={openProfileModal} dismissible onClose={() => setOpenProfileModal(false)}>

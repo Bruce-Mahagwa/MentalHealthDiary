@@ -8,7 +8,7 @@ export const makeDiaryEntry = createAsyncThunk("/diary/add", async ({entry, tags
         return data;
     }
     catch(e) {
-        if (e.reponse.data.error) {
+        if (e.response.data.error) {
             return rejectWithValue(e.response.data.error);
         }
     }
@@ -20,7 +20,7 @@ export const getLatestEntries = createAsyncThunk("/diary/latest", async (_, {rej
         return data;
     }
     catch(e) {
-        if (e.reponse.data.error) {
+        if (e.response.data.error) {
             return rejectWithValue(e.response.data.error);
         }
     }
@@ -32,7 +32,7 @@ export const getTaggedEntries = createAsyncThunk("/diary/tagged", async (_, {rej
         return data;
     }
     catch(e) {
-        if (e.reponse.data.error) {
+        if (e.response.data.error) {
             return rejectWithValue(e.response.data.error);
         }
     }
@@ -44,7 +44,7 @@ export const getEntries = createAsyncThunk("/diary/entries", async ({start, end}
         return data;
     }
     catch(e) {
-        if (e.reponse.data.error) {
+        if (e.response.data.error) {
             return rejectWithValue(e.response.data.error);
         }
     }

@@ -1,14 +1,13 @@
 // dependencies
 import { Button, Drawer, Sidebar, Modal} from "flowbite-react";
-import { useState } from "react";
 import { FaSearch, FaPen, FaCalendarAlt, FaHashtag } from "react-icons/fa";
 import { IoIosJournal } from "react-icons/io";
 import { HiUsers } from "react-icons/hi";
-import { FcAbout } from "react-icons/fc";
 
 export function DrawerNavigation({isOpenMenu, setIsOpenMenu}) {
   const handleClose = () => setIsOpenMenu(false); // closes drawer navigation
 
+  
   return (
     <>
         <div className = "hidden md:block max-h-screen overflow-y-scroll">
@@ -19,7 +18,7 @@ export function DrawerNavigation({isOpenMenu, setIsOpenMenu}) {
                   <Sidebar.Items>
                     <Sidebar.ItemGroup className = "pt-0 mt-0 px-0">                    
                       <Sidebar.Item icon={FaPen} className="no-underline cursor-pointer">
-                        <Button className = 'text-black no-underline border-0' size="sm">Write Posts</Button>
+                        <Button className = 'text-black no-underline border-0' size="sm">Write Entry</Button>
                       </Sidebar.Item>
 
                       <Sidebar.Item icon={IoIosJournal} className="no-underline cursor-pointer">
@@ -50,15 +49,8 @@ export function DrawerNavigation({isOpenMenu, setIsOpenMenu}) {
                           </Sidebar.Item>
                       </Sidebar.Collapse>
                       
-                    </Sidebar.ItemGroup>
-                    
-                    <Sidebar.ItemGroup>
-                      <Sidebar.Item icon={FcAbout} className="no-underline cursor-pointer">                      
-                        <Button className = 'text-black no-underline border-0' size="sm">About</Button>
-                      </Sidebar.Item>                
-                    </Sidebar.ItemGroup>
-
-                  </Sidebar.Items>
+                    </Sidebar.ItemGroup>                                        
+                  </Sidebar.Items> 
                 </div>
               </div>
             </Sidebar>
@@ -78,7 +70,7 @@ export function DrawerNavigation({isOpenMenu, setIsOpenMenu}) {
                 <Sidebar.Items>
                       <Sidebar.ItemGroup className = "pt-0 mt-0">                    
                         <Sidebar.Item icon={FaPen} className="no-underline cursor-pointer">
-                          <Button className = 'text-black no-underline border-0' size="sm">Write Posts</Button>
+                          <Button className = 'text-black no-underline border-0' size="sm">Write Entry</Button>
                         </Sidebar.Item>
 
                         <Sidebar.Item icon={IoIosJournal} className="no-underline cursor-pointer">
@@ -109,13 +101,7 @@ export function DrawerNavigation({isOpenMenu, setIsOpenMenu}) {
                             </Sidebar.Item>
                         </Sidebar.Collapse>
                         
-                      </Sidebar.ItemGroup>
-                      
-                      <Sidebar.ItemGroup>
-                        <Sidebar.Item icon={FcAbout} className="no-underline cursor-pointer">                      
-                          <Button className = 'text-black no-underline border-0' size="sm">About</Button>
-                        </Sidebar.Item>                
-                      </Sidebar.ItemGroup>
+                      </Sidebar.ItemGroup>                                            
 
                     </Sidebar.Items>
                 </div>

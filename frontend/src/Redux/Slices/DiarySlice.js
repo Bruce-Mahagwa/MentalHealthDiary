@@ -10,7 +10,7 @@ const initialState = {
     latest_entries: {entries: [], loading: "", error: ""}
 }
 
-const diarySlice = createSlice({
+const diarySlice = createSlice({ 
     name: "diary",
     initialState,
     reducers: {},
@@ -20,9 +20,14 @@ const diarySlice = createSlice({
         }).addCase(makeDiaryEntry.rejected, (state, action) => {
             state.new_entry.loading = false;
             state.new_entry.error = action.payload;
+            // clear state
+            state.new_entry.entry = {}
         }).addCase(makeDiaryEntry.fulfilled, (state, action) => {
-            const {data} = action.payload.data;
-            state.new_entry.entry = data;
+            const {data} = action.payload; 
+            state.new_entry.entry = data; 
+            state.new_entry.loading = false;
+            // clear error
+            state.new_entry.error = ""
         }).addCase(getLatestEntries.pending, (state) => {
             state.latest_entries.loading = true;
         }).addCase(getLatestEntries.rejected, (state, action) => {

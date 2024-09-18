@@ -2,6 +2,7 @@
 import { Checkbox, Label } from "flowbite-react";
 import { useEffect, useState } from "react";
 const TagFriendRow = ({userName, _id, tags, setTags}) => { 
+
     const [isChecked, setIsChecked] = useState(false);
 
     useEffect(() => {
@@ -20,9 +21,9 @@ const TagFriendRow = ({userName, _id, tags, setTags}) => {
     }, [isChecked]) 
 
     return (
-        <div className = "flex justify-between w-full md:w-4/5 md:mx-auto lg:w-1/2 border-gray-400 border-1 align-middle p-2 sm:p-4 cursor-pointer">
-            <Checkbox id={userName} checked = {isChecked}  onChange={() => setIsChecked(!isChecked)}/>
-            <Label htmlFor={userName}>{userName}</Label>
+        <div htmlFor= {userName} className = "flex justify-between w-full md:w-1/2 md:mx-auto lg:w-1/2 border-gray-400 border-1 align-middle p-2 sm:p-4 md:px-8 cursor-pointer">
+            <Checkbox id={userName} checked = {isChecked}  onChange={() => setIsChecked(!isChecked)} className="cursor-pointer"/>
+            <Label htmlFor={userName} className="cursor-pointer">{userName}</Label>
         </div>
     )
 }

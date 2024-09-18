@@ -57,6 +57,7 @@ const NavigationLoggedIn = ({setIsOpenMenu}) => {
             {/* gives info about the app */}
             <About openAboutModal = {openAboutModal} setOpenAboutModal = {setOpenAboutModal}/>
             {/* gives info about the app */}
+            
             {/* opens profile modal */}
             {<Profile openProfileModal = {openProfileModal} setOpenProfileModal={setOpenProfileModal} />}
             {/* opens profile modal */}

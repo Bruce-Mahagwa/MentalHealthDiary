@@ -8,7 +8,7 @@ export const getMyFriends = createAsyncThunk("/friends/fetchfriends", async (_, 
         return data;
     }
     catch(e) {
-        if (e.reponse.data.error) {
+        if (e.response.data.error) {
             return rejectWithValue(e.response.data.error);
         }
     }
@@ -20,7 +20,7 @@ export const searchForUsers = createAsyncThunk("/friends/search", async ({name},
         return data;        
     }
     catch(e) {
-        if (e.reponse.data.error) {
+        if (e.response.data.error) {
             return rejectWithValue(e.response.data.error);
         }
     }
