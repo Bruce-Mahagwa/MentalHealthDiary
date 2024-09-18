@@ -11,27 +11,22 @@ import Typography from '@mui/material/Typography';
 import { useState } from "react";
 const steps = [
     {
-      label: 'Select campaign settings',
-      description: `For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.`,
+      label: 'Getting Started',
+      description: `By this time you would have already set up your account. Congratulations.
+      Ideally you should begin by making an entry in the write entry option. Make the entry personal
+      and meaningful to you as it reflects your current emotional, physical and mental state today.`,
     },
     {
-      label: 'Create an ad group',
-      description:
-        'An ad group contains one or more ads which target a shared set of keywords.',
+      label: 'Make a friend',
+      description: 'Friends are important in our daily lives. At health diary we encourage making friends. Head over to the search tab and find some friends then send them a friend request. Once your request has been accepted you can tag your new friends in the entries you make and they can tag you as well.'
     },
     {
-      label: 'Create an ad',
-      description: `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`,
+      label: 'Read and Support Friends',
+      description: `You can read entries from other users if they tag you. You can also tag your friends as well.`
     },
   ];
 
-const About = () => {
-    const [openModal, setOpenModal] = useState(false);
+const About = ({openAboutModal, setOpenAboutModal}) => {
     const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = () => {
@@ -48,7 +43,7 @@ const About = () => {
 
   return (
     <>
-      <Modal show={openModal} onClose={() => setOpenModal(false)}>
+      <Modal show={openAboutModal} onClose={() => {setOpenAboutModal(false); handleReset()}}>
         <Modal.Header>Brief Overview of Health Diary</Modal.Header>
         <Modal.Body>
             <Box sx={{ maxWidth: 400 }}>
@@ -99,10 +94,7 @@ const About = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          {/* <Button onClick={() => setOpenModal(false)}>I accept</Button>
-          <Button color="gray" onClick={() => setOpenModal(false)}>
-            Decline
-          </Button> */}
+          <Button onClick={() => {setOpenAboutModal(false); handleReset()}}>Done</Button>          
         </Modal.Footer>
       </Modal>
     </>
