@@ -9,7 +9,7 @@ const getMyFriends = async (req, res) => {
         const friends = await UserModel.findById(user_id).select("friends").populate("friends", {password: 0, friends: 0, friend_requests_sent:0, updatedAt: 0, diary_entries: 0, friend_requests: 0, email: 0})
         return res.status(200).json({
             data: friends
-            }
+        }
         );
     }
     catch(e) {
@@ -31,15 +31,16 @@ const getMyFriends = async (req, res) => {
         const requester = await UserModel.findById(requester_id);
 
         if (friend.friend_requests.includes(requester_id)) {
-            return res.status(201).json({message: "You have already sent a request to this person"})
+            return res.status(403).json({error: "You have already sent a request to this person"})
         }
         friend.friend_requests.push(requester_id);
         requester.friend_requests_sent.push(friend_id)
         await friend.save();
         await requester.save();
         return res.status(200).json({
-            friend_model: friend.friend_requests,
-            requester_model: requester.friend_requests_sent
+            // friend_model: friend.friend_requests,
+            // requester_model: requester.friend_requests_sent,
+            message: "Your friend request has been sent"
         })
   }
     catch(e) {
@@ -96,7 +97,7 @@ const getMyFriends = async (req, res) => {
 
         const is_already_friend = friend.friends.indexOf(requester_id);
         if (is_already_friend !== -1) {
-            return res.status(201).json({message: "You are already friends"})
+            return res.status(403).json({error: "You are already friends"})
         }
         const index_of_request = friend.friend_requests.indexOf(requester_id);
         if (index_of_request !== -1) {
@@ -106,6 +107,7 @@ const getMyFriends = async (req, res) => {
         const index_of_request_sent = requester.friend_requests_sent.indexOf(friend_id);
         if (index_of_request_sent !== -1) {
             requester.friend_requests_sent.splice(index_of_request_sent, 1);
+            requester.friends.push(friend_id); // add as friend
         }
         await friend.save();
         await requester.save();
@@ -121,7 +123,7 @@ const getMyFriends = async (req, res) => {
 
 
 
-  const getMyFriendRequests = async (req, res) => {
+  const getMyFriendRequests = async (req, res) => {  
     try {
         await connectDB();
         const user_id = req.user._id;
@@ -138,7 +140,7 @@ const getMyFriends = async (req, res) => {
 
   const getFriendRequestsSent = async (req, res) => {
     try {
-        await connectDB();
+        await connectDB(); 
         const user_id = req.user._id;
         const friend_requests_sent = await UserModel.findById(user_id).select("friend_requests_sent").populate("friend_requests_sent", {password: 0, friends: 0, friend_requests_sent:0, updatedAt: 0, diary_entries: 0, friend_requests: 0, email: 0});
         return res.status(200).json({
@@ -153,6 +155,7 @@ const getMyFriends = async (req, res) => {
 
   const deleteFriendRequest = async (req, res) => {
     try {
+        await connectDB();
         const potential_friend_id = req.params.id;
         const my_id = req.user._id;
 
@@ -176,7 +179,8 @@ const getMyFriends = async (req, res) => {
 
         return res.status(200).json({
             my_requests: me.friend_requests_sent,
-            potential_friend: potential_friend.friend_requests
+            potential_friend: potential_friend.friend_requests,
+            message: "The request has been deleted"
         })
     }
     catch(e) {
@@ -224,7 +228,12 @@ const getMyFriends = async (req, res) => {
     try {
         await connectDB();
         const search_query = req?.query?.name;
-        // search under username, firstname and lastname
+        const user_id = req.user._id;
+        const user = await UserModel.findById(user_id);
+        let friends_friend_requests_friend_requests_sent = [...user.friend_requests, ...user.friend_requests_sent, ...user.friends, user_id];
+        friends_friend_requests_friend_requests_sent = friends_friend_requests_friend_requests_sent.map((id) => String(id));
+
+        // search under username, firstname and lastname 
         if (search_query?.trim().length === 0) {
             return res.status(200).json({data: []});
         }
@@ -237,7 +246,13 @@ const getMyFriends = async (req, res) => {
         
         const data = [];
         await results.forEach((user) => {
-            data.push(user);
+            const _id = String(user._id);
+            if (friends_friend_requests_friend_requests_sent.includes(_id)) {
+                // pass
+            }
+            else {
+                data.push(user);
+            }
         })
         return res.status(200).json({data: data});
     }

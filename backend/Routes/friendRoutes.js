@@ -14,7 +14,7 @@ const {
 
 router.use(verifyIsLoggedIn);
 
-router.get("/fetchfriends", getMyFriends);
+router.get("/fetchfriends", getMyFriends);  
 router.post("/request/:id", sendFriendRequest);
 
 router.get("/requests", getMyFriendRequests);

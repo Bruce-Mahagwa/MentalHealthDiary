@@ -10,7 +10,7 @@ const {
     getUserProfile, 
     logOutUser
 } = require("../Controllers/usersController");
-
+  
 const {
     verifyIsLoggedIn
 } = require("../Middleware/verifyAuthToken");
@@ -22,7 +22,7 @@ router.get("/user/logout", logOutUser);
 router.use(verifyIsLoggedIn); // checks for login permissions 
 
 router.post("/user", saveUserProfile);
-router.get("/user/:id", getUserProfile);
+router.get("/user", getUserProfile);  
 
 
 module.exports = router;

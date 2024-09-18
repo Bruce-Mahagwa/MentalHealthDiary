@@ -1,7 +1,6 @@
 // dependencies
 const mongoose = require("mongoose");
 // variables
-
 const connectDB = async () => {
   try {
     await mongoose.connect(MONGO_URI);

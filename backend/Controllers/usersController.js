@@ -109,18 +109,24 @@ const {
   };
   
   const saveUserProfile = async (req, res) => {
-    try {
+    try { 
       await connectDB()
-      const user = await UserModel.findById(req.user._id).select("-password");
-      const firstName = req.body?.firstName;
+      const user = await UserModel.findById(req.user._id)
+      const firstName = req.body?.firstName; 
       const lastName = req.body?.lastName;
       const highlight = req.body?.highlight;
       user.firstName = firstName || user.firstName;
       user.lastName = lastName || user.lastName;
-      user.highlight = highlight || user.highlight;
+      user.highlight = highlight || user.highlight;  
       await user.save();
+      const new_user = {
+        userName: user?.userName,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        highlight: user?.highlight
+      }
       return res.status(200).json({
-        data: user, 
+        data: new_user
       });
     }
     catch (e) {
@@ -134,8 +140,8 @@ const {
   const getUserProfile = async (req, res) => {
     try {
       await connectDB()
-      const { id } = req.params;
-      const user = await UserModel.findById(id).select("-password");
+      const id = req.user._id
+      const user = await UserModel.findById(id).select({userName: 1, firstName: 1, lastName: 1, highlight: 1});
       return res.status(200).json({ data: user });
     } catch (e) {
       console.log(e);

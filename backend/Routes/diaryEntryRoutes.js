@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 // files
 const {
-    saveEntry, updateEntry
+    saveEntry, updateEntry, getEntries, getLatestEntries, getTaggedEntries
 } = require("../Controllers/diaryentryController.js");
 
 const {
@@ -14,6 +14,10 @@ const {
 router.use(verifyIsLoggedIn);
 
 router.post("/add", saveEntry);
-router.put("/edit/:id", updateEntry);
+router.put("/edit/:id", updateEntry);  
+ 
+router.get("/latest", getLatestEntries)
+router.get("/entries", getEntries);
+router.get("/tagged", getTaggedEntries)
 
 module.exports = router;

@@ -1,21 +1,20 @@
 const connectDB = require("../config/db");
 const DiaryEntryModel = require("../Models/DiaryEntryModel");
 const UserModel = require("../Models/UserModel");
-const ThemeModel = require("../Models/ThemeModel");
+const mongoose = require("mongoose");
 
 const saveEntry = async (req, res) => { 
     try {
         await connectDB();
         const owner = req.user._id;
-
         const owner_doc = await UserModel.findById(owner);
 
         const {entry, tags} = req.body;
         if (!entry || entry?.trim().length === 0) {
-            return res.status(403).json({message: "Please add a diary entry"})
+            return res.status(403).json({error: "Please add a diary entry"})
         }
-        const new_entry = await DiaryEntryModel.create({
-            entry,
+        const new_entry = await DiaryEntryModel.create({  
+            entry,  
             tags,
             owner
         })
@@ -26,7 +25,7 @@ const saveEntry = async (req, res) => {
             data: new_entry
         })
     }
-    catch(e) {
+    catch(e) { 
         console.log(e);
         return res.status(404).json({error: "Could not save diary entry at this time. Please refresh page."})
     }
@@ -56,14 +55,60 @@ const updateEntry = async (req, res) => {
         return res.status(404).json({error: "Could not save diary entry at this time. Please refresh page."})
     }
 }
-
-const getEntries = async (req, res) => {
+ 
+const getLatestEntries = async (req, res) => {
     try {
-
+        await connectDB();
+        const user_id = req.user._id;
+        const entries = await UserModel.findById(user_id).populate("diary_entries").select({diary_entries: 1, _id: 0}).sort({"diary_entries.createdAt": 1})
+        const data = entries.diary_entries.slice(0, 10);
+        // console.log(entries)
+        return res.status(200).json({
+            data: data
+        })
     }
     catch(e) {
         console.log(e);
         return res.status(404).json({error: "Could not get diary entry at this time. Please refresh page."})
     }
 }
-module.exports = {saveEntry, updateEntry};
+
+const getEntries = async (req, res) => {
+    try {
+        await connectDB()
+        const startDate = req?.query?.start;
+        const endDate =  req?.query?.end;
+        const user_id = req.user._id;
+        const userentries = await UserModel.findById(user_id).populate({path: "diary_entries", match: {"createdAt": {$gte: startDate, $lte: endDate}}}).select({diary_entries: 1}).sort({createdAt: 1})        
+        
+        return res.status(200).json({
+            data: userentries
+        })
+    }
+    catch(e) {
+        console.log(e);
+        return res.status(404).json({error: "Could not get diary entry at this time. Please refresh page."})
+    }
+}
+
+const getTaggedEntries = async (req, res) => {
+    try {
+        await connectDB();
+        const user_id = req.user._id;
+        const entries = await DiaryEntryModel.find({tags: {
+            $in: [user_id]
+        }}).select({entry: 1, owner: 1, createdAt: 1}).populate("owner", "userName");
+        let data = [];
+        await entries.forEach((entry) => {
+            data.push(entry);
+        })
+        return res.status(200).json({
+            data: data
+        })
+    }
+    catch(e) {  
+        console.log(e);
+        return res.status(404).json({error: "Could not get diary entry at this time. Please refresh page."})
+    }
+}
+module.exports = {saveEntry, updateEntry, getLatestEntries, getEntries, getTaggedEntries};
