@@ -1,8 +1,9 @@
 // actions
 import { saveUserProfile, fetchProfile } from "../../Redux/Actions/UserActions"
+
 export const handleProfileUpdate = (dispatch, setLocalError, firstName, lastName, highlight) => {
     try {
-        dispatch(saveUserProfile(firstName, lastName, highlight))
+        dispatch(saveUserProfile({firstName: firstName, lastName: lastName, highlight: highlight}))
     }
     catch(e) {
         setLocalError("We encountered an internal error. Please reload page")

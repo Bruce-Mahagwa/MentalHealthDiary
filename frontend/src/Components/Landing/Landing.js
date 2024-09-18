@@ -10,7 +10,7 @@ const Landing = () => {
     const {user} = useSelector(state => state.users);
     if (user?.userName) {
         // in case the user is already logged in this block will redirect to the home page
-        window.location.href = "/home"
+        return window.location.href = "/home"
     }
     return (
         <>

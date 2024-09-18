@@ -14,7 +14,8 @@ import { useState } from "react";
 const NavigationLoggedIn = ({setIsOpenMenu}) => {  
     const dispatch = useDispatch();
     // state
-    const [openAboutModal, setOpenAboutModal] = useState(false);
+    const [openAboutModal, setOpenAboutModal] = useState(true);
+    const [openProfileModal, setOpenProfileModal] = useState(false);
     return (
         <>
             <Button.Group className = "hidden sm:flex justify-end pr-4 md:pr-10 xl:pr-12 pt-4">
@@ -25,7 +26,7 @@ const NavigationLoggedIn = ({setIsOpenMenu}) => {
                     <FcAbout className = "mr-1 h-6 w-6"/>
                     About
                 </Button>
-                <Button color="gray" className="hover:opacity-50">
+                <Button color="gray" className="hover:opacity-50" onClick = {() => setOpenProfileModal(true)}>
                     <HiUserCircle className="mr-1 h-6 w-6" />
                     Profile
                 </Button>
@@ -44,7 +45,7 @@ const NavigationLoggedIn = ({setIsOpenMenu}) => {
                     <FcAbout className = "mr-1 h-4 w-4"/>
                     About
                 </Button>
-                <Button color = "gray" size="sm" className="hover:opacity-50">
+                <Button color = "gray" size="sm" className="hover:opacity-50" onClick = {() => setOpenProfileModal(true)}>
                     <HiUserCircle className="mr-1 h-4 w-4" />
                     Profile
                 </Button>
@@ -56,6 +57,9 @@ const NavigationLoggedIn = ({setIsOpenMenu}) => {
             {/* gives info about the app */}
             <About openAboutModal = {openAboutModal} setOpenAboutModal = {setOpenAboutModal}/>
             {/* gives info about the app */}
+            {/* opens profile modal */}
+            {<Profile openProfileModal = {openProfileModal} setOpenProfileModal={setOpenProfileModal} />}
+            {/* opens profile modal */}
         </>
     )  
 }

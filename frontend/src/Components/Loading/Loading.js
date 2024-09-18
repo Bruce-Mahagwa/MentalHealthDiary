@@ -2,8 +2,8 @@
 import { Spinner } from "flowbite-react"
 const Loading = () => {
     return (
-        <div>
-            <Spinner aria-label="Extra large spinner" size="xl" />
+        <div className = "my-auto mx-auto">
+            <Spinner aria-label="Extra large spinner" color = "success" size="xl" />
         </div>
     )
 }

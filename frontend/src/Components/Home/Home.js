@@ -6,8 +6,7 @@ import MainContent from "../MainContent/MainContent";
 // dependencies
 import { useState } from "react";
 const Home = () => {
-    const [isOpenMenu, setIsOpenMenu] = useState(true); //toggles drawer navigation for small screens
-     
+    const [isOpenMenu, setIsOpenMenu] = useState(false); //toggles drawer navigation for small screens     
     return ( 
         <>
             <main id = "main" className = "w-full min-h-screen overflow-y-hidden">

@@ -64,7 +64,7 @@ export const registerUser = createAsyncThunk("users/register", async ({ userName
 
   export const saveUserProfile = createAsyncThunk("/user/save", async ({firstName, lastName, highlight}, {rejectWithValue}) => {
     try {
-      const {data} = await axios.post("/users/user", {firstName: firstName, highlight: highlight, lastName: lastName})
+      const {data} = await axios.post("/users/user", {"firstName": firstName, "highlight": highlight, "lastName": lastName})
       return data;
     }
     catch(e) {
