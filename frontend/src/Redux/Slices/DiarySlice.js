@@ -33,10 +33,14 @@ const diarySlice = createSlice({
         }).addCase(getLatestEntries.rejected, (state, action) => {
             state.latest_entries.loading = false;
             state.latest_entries.error = action.payload;
+            // clear state
+            state.latest_entries.entries = []
         }).addCase(getLatestEntries.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.latest_entries.loading = false;
             state.latest_entries.entries = data;
+            // clear state
+            state.latest_entries.error = "";
         }).addCase(getTaggedEntries.pending, (state) => {
             state.tagged_entries.loading = true;
         }).addCase(getTaggedEntries.rejected, (state, action) => {
@@ -51,10 +55,14 @@ const diarySlice = createSlice({
         }).addCase(getEntries.rejected, (state, action) => {
             state.my_entries.loading = false;
             state.my_entries.error = action.payload;
+            // clear state
+            state.my_entries.entries = []
         }).addCase(getEntries.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.my_entries.loading = false;
-            state.my_entries.entries = data;
+            state.my_entries.entries = data.diary_entries;
+            // clear state
+            state.my_entries.error = ""
         })
     }
 })

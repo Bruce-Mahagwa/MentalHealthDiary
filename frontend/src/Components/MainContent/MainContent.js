@@ -18,9 +18,9 @@ const MainContent = () => {
             <div className = "w-full mx-auto">
                 {/* <Editor /> */}
                 {/* <FriendsContent /> */}
-                <Entries />  
+                {/* <Entries />   */}
                 {/* <TaggedEntries /> */}
-                {/* <MyEntries /> */}
+                <MyEntries />
                 {/* <SearchFriends /> */}
                 {/* <FriendsRequests /> */}
                 {/* <Invites /> */}

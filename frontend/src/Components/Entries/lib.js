@@ -21,9 +21,10 @@ export const handleTaggedEntries = (dispatch, setLocalError) => {
 
 export const handleMyEntries = (dispatch, setLocalError, start, end) => {
     try {
-        const startDay = `${start.$d.getFullYear()}-${Number(start.$d.getMonth()) + 1}-${start.$d.getDate()}`
-        const endDay = `${end.$d.getFullYear()}-${Number(end.$d.getMonth()) + 1}-${end.$d.getDate()}`        
-        dispatch(getEntries({start: startDay, end: endDay}))
+        // const startDay = `${start.$d.getFullYear()}-${Number(start.$d.getMonth()) + 1}-${start.$d.getDate()}`
+        // const endDay = `${end.$d.getFullYear()}-${Number(end.$d.getMonth()) + 1}-${end.$d.getDate()}`        
+        // console.log(start, end)
+        dispatch(getEntries({start: start.$d, end: end.$d}))
     }
     catch(e) {
         setLocalError("We are experiencing some difficulties. Please reload the page")

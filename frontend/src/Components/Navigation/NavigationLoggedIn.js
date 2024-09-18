@@ -8,7 +8,7 @@ import { FcAbout } from "react-icons/fc";
 import { MdOutlineLogout } from "react-icons/md";
 import { VscThreeBars } from "react-icons/vsc";
 import { Button } from "flowbite-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 const NavigationLoggedIn = ({setIsOpenMenu}) => {  
@@ -16,6 +16,7 @@ const NavigationLoggedIn = ({setIsOpenMenu}) => {
     // state
     const [openAboutModal, setOpenAboutModal] = useState(true);
     const [openProfileModal, setOpenProfileModal] = useState(false);
+    const {userName} = useSelector(state => state.users.user)
     return (
         <>
             <Button.Group className = "hidden sm:flex justify-end pr-4 md:pr-10 xl:pr-12 pt-4">
@@ -28,7 +29,7 @@ const NavigationLoggedIn = ({setIsOpenMenu}) => {
                 </Button>
                 <Button color="gray" className="hover:opacity-50" onClick = {() => setOpenProfileModal(true)}>
                     <HiUserCircle className="mr-1 h-6 w-6" />
-                    Profile
+                    {userName}
                 </Button>
                 <Button color="gray" onClick = {() => logout(dispatch)} className="hover:opacity-50">
                     <MdOutlineLogout className = "mr-1 h-6 w-6" />
@@ -47,7 +48,7 @@ const NavigationLoggedIn = ({setIsOpenMenu}) => {
                 </Button>
                 <Button color = "gray" size="sm" className="hover:opacity-50" onClick = {() => setOpenProfileModal(true)}>
                     <HiUserCircle className="mr-1 h-4 w-4" />
-                    Profile
+                    {userName}
                 </Button>
                 <Button color = "gray" size="sm" onClick = {() => logout(dispatch)} className="hover:opacity-50">
                     <MdOutlineLogout className = "mr-1 h-4 w-4" />
