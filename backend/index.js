@@ -14,8 +14,8 @@ const whitelist = [
     "https://web.postman.co",
     "http://localhost:3000/",
     "http://localhost:3000",
-
-    ];
+    "https://mental-health-diary.vercel.app"
+    ]; 
 
 const corsoptions = {
   origin: function (origin, callback) {
