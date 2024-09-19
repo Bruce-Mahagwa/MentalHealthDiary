@@ -1,6 +1,7 @@
 // functions, models, files 
 const UserModel = require("../Models/UserModel");
 const {connectDB} = require("../config/db");
+
 const getMyFriends = async (req, res) => {
     try {
         await connectDB();

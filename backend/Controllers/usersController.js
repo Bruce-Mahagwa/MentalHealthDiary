@@ -3,9 +3,11 @@ const {
     hashPassword,
     comparePassword,
   } = require("../Lib/passwordFunctions");
-  const { generateCookie } = require("../Lib/generateCookie");
-  const UserModel = require("../Models/UserModel");
-  const {connectDB} = require("../config/db");
+  
+const { generateCookie } = require("../Lib/generateCookie");
+const UserModel = require("../Models/UserModel");
+const {connectDB} = require("../config/db");
+
   const registerUser = async (req, res) => {
     try {
       await connectDB()
