@@ -43,7 +43,7 @@ const Home = () => {
                     openInvites={openInvites}
                     showLogo = {showLogo}
                     />
-                </div>
+                </div>  
             </main>
         </>
     )
