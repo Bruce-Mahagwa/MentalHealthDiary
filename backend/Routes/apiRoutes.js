@@ -1,6 +1,7 @@
 // dependencies
 const jwt = require("jsonwebtoken");
 // variables
+require('dotenv').config()
 const express = require("express");
 const app = express();
 // files

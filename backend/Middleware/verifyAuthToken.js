@@ -1,6 +1,6 @@
 // dependencies
 const jwt = require("jsonwebtoken");
-
+require('dotenv').config()
 const verifyIsLoggedIn = (req, res, next) => {
   const token = req.cookies?.access_token;
   try {   

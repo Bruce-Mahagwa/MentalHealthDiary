@@ -2,7 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-
+require('dotenv').config()
 // files and functions
 const apiRoutes = require("./Routes/apiRoutes");
 
@@ -13,7 +13,8 @@ const whitelist = [
     "https://web.postman.co/",
     "https://web.postman.co",
     "http://localhost:3000/",
-    "http://localhost:3000"
+    "http://localhost:3000",
+
     ];
 
 const corsoptions = {
