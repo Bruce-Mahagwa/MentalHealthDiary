@@ -5,7 +5,7 @@ const {
   } = require("../Lib/passwordFunctions");
   const { generateCookie } = require("../Lib/generateCookie");
   const UserModel = require("../Models/UserModel");
-  const connectDB = require("../config/db.js");
+  const {connectDB} = require("../config/db");
   const registerUser = async (req, res) => {
     try {
       await connectDB()
