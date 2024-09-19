@@ -7,7 +7,6 @@ const {
   const UserModel = require("../Models/UserModel");
   const connectDB = require("../config/db");
 
-
   const registerUser = async (req, res) => {
     try {
       await connectDB()
