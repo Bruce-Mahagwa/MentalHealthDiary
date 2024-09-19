@@ -1,6 +1,19 @@
 // functions, models, files 
 const UserModel = require("../Models/UserModel");
-const {connectDB} = require("../config/db");
+// dependencies
+const mongoose = require("mongoose");
+require('dotenv').config()
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("connected to db");
+  } catch (e) {
+    console.log("failed to connect to database"); 
+    console.log(e);
+    process.exit(1);
+  }
+};
 
 const getMyFriends = async (req, res) => {
     try {
