@@ -17,6 +17,8 @@ const diarySlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(makeDiaryEntry.pending, (state, action) => {
             state.new_entry.loading = true;
+            // clear state
+            state.new_entry.error = ""
         }).addCase(makeDiaryEntry.rejected, (state, action) => {
             state.new_entry.loading = false;
             state.new_entry.error = action.payload;            
@@ -28,6 +30,8 @@ const diarySlice = createSlice({
             state.new_entry.error = ""
         }).addCase(getLatestEntries.pending, (state) => {
             state.latest_entries.loading = true;            
+            // clear state
+            state.latest_entries.error = ""
         }).addCase(getLatestEntries.rejected, (state, action) => {
             state.latest_entries.loading = false;
             state.latest_entries.error = action.payload;            
@@ -39,6 +43,8 @@ const diarySlice = createSlice({
             state.latest_entries.error = "";
         }).addCase(getTaggedEntries.pending, (state) => {
             state.tagged_entries.loading = true; 
+            // clear state
+            state.tagged_entries.error = ""
         }).addCase(getTaggedEntries.rejected, (state, action) => {
             state.tagged_entries.loading = false;
             state.tagged_entries.error = action.payload;            
@@ -50,13 +56,17 @@ const diarySlice = createSlice({
             state.tagged_entries.error = ""
         }).addCase(getEntries.pending, (state) => {
             state.my_entries.loading = true;
+            // clear state
+            state.my_entries.error = ""
         }).addCase(getEntries.rejected, (state, action) => {
             state.my_entries.loading = false;
             state.my_entries.error = action.payload;            
         }).addCase(getEntries.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.my_entries.loading = false;
-            state.my_entries.entries = data.diary_entries;           
+            state.my_entries.entries = data.diary_entries;
+            // clear state
+            state.my_entries.error = ""
         })
     }
 })
