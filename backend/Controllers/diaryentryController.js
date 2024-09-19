@@ -1,4 +1,6 @@
-const connectDB = require("../config/db");
+// const connectDB = require("../config/db");
+const connectDB = require("../config/db.js");
+
 const DiaryEntryModel = require("../Models/DiaryEntryModel");
 const UserModel = require("../Models/UserModel");
 const mongoose = require("mongoose");
