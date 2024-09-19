@@ -60,9 +60,9 @@ const getLatestEntries = async (req, res) => {
     try {
         await connectDB();
         const user_id = req.user._id;
-        const entries = await UserModel.findById(user_id).populate("diary_entries").select({diary_entries: 1, _id: 0}).sort({"diary_entries.createdAt": 1})
+        const entries = await UserModel.findById(user_id).populate("diary_entries").select({diary_entries: 1, _id: 0})
+        entries.diary_entries.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());        
         const data = entries.diary_entries.slice(0, 10);
-        // console.log(entries)
         return res.status(200).json({
             data: data
         })
@@ -79,8 +79,8 @@ const getEntries = async (req, res) => {
         const startDate = req?.query?.start;
         const endDate =  req?.query?.end;
         const user_id = req.user._id;
-        const userentries = await UserModel.findById(user_id).populate({path: "diary_entries", match: {"createdAt": {$gte: startDate, $lte: endDate}}}).select({diary_entries: 1}).sort({createdAt: 1})        
-        
+        const userentries = await UserModel.findById(user_id).populate({path: "diary_entries", match: {"createdAt": {$gte: startDate, $lte: endDate}}}).select({diary_entries: 1})
+        userentries.diary_entries.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());        
         return res.status(200).json({
             data: userentries
         })
@@ -102,6 +102,7 @@ const getTaggedEntries = async (req, res) => {
         await entries.forEach((entry) => {
             data.push(entry);
         })
+        data.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());        
         return res.status(200).json({
             data: data
         })
