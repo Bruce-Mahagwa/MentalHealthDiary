@@ -13,7 +13,13 @@ const initialState = {
 const diarySlice = createSlice({ 
     name: "diary",
     initialState,
-    reducers: {},
+    reducers: {
+        clearEntry(state) {
+            // clears the new entry state
+            state.new_entry.entry = "";
+            state.new_entry.error = "";
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(makeDiaryEntry.pending, (state, action) => {
             state.new_entry.loading = true;
@@ -72,3 +78,4 @@ const diarySlice = createSlice({
 })
 
 export default diarySlice.reducer;
+export const {clearEntry} = diarySlice.actions;

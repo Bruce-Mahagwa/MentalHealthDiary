@@ -17,7 +17,6 @@ export const handleRegister = async (dispatch, setLocalError, userName, email, p
 
 export const handleLogin = async (dispatch, setLocalError, userName, password) => {
     try {
-        console.log("login", userName, password)
         if (userName && password) {
             dispatch(loginUser({userName: userName, password: password}));
         }

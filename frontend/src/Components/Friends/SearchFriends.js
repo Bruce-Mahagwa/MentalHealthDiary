@@ -47,7 +47,7 @@ const SearchFriends = () => {
             {localError && 
                 <Alert severity="error">{localError}</Alert>
             }
-            {loading && 
+            {loading &&  
                 <div className = "flex justify-center items-center">
                     <Loading />
                 </div>}

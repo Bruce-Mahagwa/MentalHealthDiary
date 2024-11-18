@@ -8,7 +8,7 @@ import Home from './Components/Home/Home';
 // dependencies
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import axios from "axios"
-function App() {
+function App() { 
   axios.defaults.baseURL = "https://mental-health-diary-backend.vercel.app"
   axios.defaults.withCredentials = true;
 
