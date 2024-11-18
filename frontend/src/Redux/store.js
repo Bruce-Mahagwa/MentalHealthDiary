@@ -24,7 +24,7 @@ const INITIAL_STATE = {
     },
     friends: {
         my_friends: {friends: [], loading: "", error: ""},
-        searched_users: {users: [], loading: "", error: ""},
+        searched_users: {users: [], loading: "", error: "", resultsIn: false},
         friend_request_status: {message: "", error: "", loading: ""},
         friend_requests: {requests: [], loading: "", error: ""},
         withdraw_request_status: {message: "", error: "", loading: ""},

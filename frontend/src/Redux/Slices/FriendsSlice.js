@@ -5,7 +5,7 @@ import { getMyFriends, searchForUsers, sendFriendRequest, getMyFriendRequests, w
 // initial state
 const initialState = {
     my_friends: {friends: [], loading: "", error: ""},
-    searched_users: {users: [], loading: "", error: ""},
+    searched_users: {users: [], loading: "", error: "", resultsIn: false},
     friend_request_status: {message: "", error: "", loading: ""},
     friend_requests: {requests: [], loading: "", error: ""},
     withdraw_request_status: {message: "", error: "", loading: ""},
@@ -17,7 +17,13 @@ const initialState = {
 const friendsSlice = createSlice({
     name: "friends",
     initialState,
-    reducers: {},
+    reducers: {
+        clearSearchedUsers(state) {
+            state.searched_users.users = [];
+            state.searched_users.error = "";
+            state.searched_users.resultsIn = false;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getMyFriends.pending, (state) => {
             state.my_friends.loading = true;
@@ -33,10 +39,12 @@ const friendsSlice = createSlice({
         }).addCase(searchForUsers.rejected, (state, action) => {
             state.searched_users.loading = false;
             state.searched_users.error = action.payload;
+            state.searched_users.resultsIn = true;
         }).addCase(searchForUsers.fulfilled, (state, action) => {
             const {data} = action.payload
             state.searched_users.users = data;
             state.searched_users.loading = false;
+            state.searched_users.resultsIn = true;
         }).addCase(sendFriendRequest.pending, (state) => {
             state.friend_request_status.loading = true;
         }).addCase(sendFriendRequest.rejected, (state,action) => {
@@ -72,9 +80,10 @@ const friendsSlice = createSlice({
         }).addCase(getMyInvites.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.invites.loading = false;
-            state.invites.invites = data.friend_requests;
+            state.invites.invites = data.friend_requests;  
         })
     }
 })
 
 export default friendsSlice.reducer;
+export const {clearSearchedUsers} = friendsSlice.actions;

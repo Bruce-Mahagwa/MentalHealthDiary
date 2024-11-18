@@ -26,6 +26,10 @@ const diarySlice = createSlice({
         clearMyEntries(state) {
             state.my_entries.entries = [];
             state.my_entries.error = "";
+        },
+        clearTaggedEntries(state) {
+            state.tagged_entries.entries = [];
+            state.tagged_entries.error = "";
         }
     },
     extraReducers: (builder) => {
@@ -86,4 +90,4 @@ const diarySlice = createSlice({
 })
 
 export default diarySlice.reducer;
-export const {clearEntry, clearLatestEntries, clearMyEntries} = diarySlice.actions;
+export const {clearEntry, clearLatestEntries, clearMyEntries, clearTaggedEntries} = diarySlice.actions;

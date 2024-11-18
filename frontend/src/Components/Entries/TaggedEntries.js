@@ -4,6 +4,7 @@ import Loading from "../Loading/Loading";
 
 // functions
 import { handleTaggedEntries } from "./lib";
+import { clearTaggedEntries } from "../../Redux/Slices/DiarySlice";
 // dependencies
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux"
@@ -15,6 +16,8 @@ const TaggedEntries = () => {
     const [localError, setLocalError] = useState("")
 
     useEffect(() => {
+        setLocalError("");
+        dispatch(clearTaggedEntries());
         handleTaggedEntries(dispatch, setLocalError)
     }, [])
 
@@ -25,13 +28,13 @@ const TaggedEntries = () => {
         </header>
         <div className = "flex flex-wrap gap-4 w-full justify-center pt-4 pb-8">
             {loading && <Loading />}
-            {error && <Alert color="failure" onDismiss={() => {}}>
+            {error && <Alert color="failure" className = "mt-4">
                 <span className="font-medium">Tagged posts:</span> {error}
             </Alert>}
-            {localError && <Alert color="failure" onDismiss={() => {}}>
+            {localError && <Alert color="failure" className = "mt-4">
                 <span className="font-medium">Tagged posts</span> {localError}
             </Alert>}
-            {!loading && entries.length === 0 && <Alert color="success" onDismiss={() => {}}>
+            {!loading && !error && !localError && entries.length === 0 && <Alert color="success" className = "mt-4">
                 <span className="font-medium">You have not been tagged in any post yet</span> 
             </Alert>}
             {!loading && entries.map((item) => {
