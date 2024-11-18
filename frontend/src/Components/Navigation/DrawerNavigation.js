@@ -1,12 +1,11 @@
 // dependencies
-import { Button, Drawer, Sidebar, Modal} from "flowbite-react";
+import { Button, Drawer, Sidebar} from "flowbite-react";
 import { FaSearch, FaPen, FaCalendarAlt, FaHashtag } from "react-icons/fa";
 import { IoIosJournal } from "react-icons/io";
 import { HiUsers } from "react-icons/hi";
 
 export function DrawerNavigation({isOpenMenu, setIsOpenMenu, setOpenFriends, setOpenInvites, setOpenRequests, setOpenTaggedEntries, setOpenSearch, setOpenWriteEntry, setOpenLatestPosts, setOpenMyEntries, setShowLogo}) {
   const handleClose = () => setIsOpenMenu(false); // closes drawer navigation
-  
   const textContents = {"Write Entry": setOpenWriteEntry, 
   "Latest Entries": setOpenLatestPosts, 
   "My Entries": setOpenMyEntries, 
@@ -26,38 +25,56 @@ export function DrawerNavigation({isOpenMenu, setIsOpenMenu, setOpenFriends, set
       }
       else {
            textContents[i](false);
+           const elements = document.querySelectorAll(".cursor-pointer");
+           for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            if (element.textContent === value) {
+              continue
+            }
+            else {
+             element.classList.remove("bg-gray-200")
+            }
+           }
+        }
       }
-    }
-
+    const element = e.currentTarget;
     switch(value) {
       case "Write Entry":
         setOpenWriteEntry(true);
+        element.classList.add("bg-gray-200")
         break;
       case "Latest Entries":
         setOpenLatestPosts(true);
+        element.classList.add("bg-gray-200")
         break;
       case "My Entries":
         setOpenMyEntries(true);
+        element.classList.add("bg-gray-200")
         break;
       case "Tagged Entries":
         setOpenTaggedEntries(true);
+        element.classList.add("bg-gray-200")
         break;
       case "Search":
         setOpenSearch(true);
+        element.classList.add("bg-gray-200")
         break;
       case "My Friends":
         setOpenFriends(true);
+        element.classList.add("bg-gray-200")
         break;
       case "Friend Requests":        
         setOpenRequests(true);
+        element.classList.add("bg-gray-200")
         break;
       case "Invites":
         setOpenInvites(true);
+        element.classList.add("bg-gray-200")
         break;
     }
   }
 
-  return (
+  return ( 
     <>
         <div className = "hidden md:block max-h-screen overflow-y-scroll">
             <Sidebar className = "bg-white">
