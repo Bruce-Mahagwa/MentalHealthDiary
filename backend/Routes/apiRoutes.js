@@ -4,12 +4,13 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config()
 const express = require("express");
 const app = express();
+
 // files
 const userRoutes = require("./userRoutes");
 const friendRoutes = require("./friendRoutes");
 const diaryRoutes = require("./diaryEntryRoutes");
 
-// get tokem
+// get token
 app.get("/get-token", (req, res) => {
     try {
       const accessToken = req.cookies["access_token"];

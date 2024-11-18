@@ -9,7 +9,6 @@ require('dotenv').config()
 
 const { generateCookie } = require("../Lib/generateCookie");
 const UserModel = require("../Models/UserModel");
-// const {connectDB} = require("../config/db");
 
 const connectDB = async () => {
   try {

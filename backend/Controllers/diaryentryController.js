@@ -1,5 +1,3 @@
-// const {connectDB} = require("../config/db");
-
 const DiaryEntryModel = require("../Models/DiaryEntryModel");
 const UserModel = require("../Models/UserModel");
 
