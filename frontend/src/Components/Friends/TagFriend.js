@@ -1,5 +1,5 @@
 // dependencies
-import { Modal, Button, Alert, Checkbox, Label } from "flowbite-react";
+import { Modal, Button, Alert } from "flowbite-react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // functions
@@ -42,7 +42,7 @@ const TagFriend = ({setTags, tags, openModal, setOpenModal}) => {
                         friends.map((friend) => {
                             const {userName, _id} = friend;
                             return (
-                                <TagFriendRow key = {_id} userName={userName} _id={_id} setTags = {setTags} tags = {tags} />
+                                <TagFriendRow key = {_id} userName={userName} _id={_id} setTags = {setTags} tags = {tags} /> 
                             )
                         }) 
                     }

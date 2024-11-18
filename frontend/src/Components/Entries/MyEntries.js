@@ -3,13 +3,14 @@ import SingleEntry from "./SingleEntry";
 import Loading from "../Loading/Loading";
 // functions
 import { handleMyEntries } from "./lib";
+import { clearMyEntries } from "../../Redux/Slices/DiarySlice";
 // dependencies
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Button, TextInput } from 'flowbite-react';
+import { Button } from 'flowbite-react';
 import dayjs from 'dayjs';
 import { Alert } from "flowbite-react";
 
@@ -19,6 +20,12 @@ const MyEntries = () => {
     const [localError, setLocalError] = useState("")
     const [start, setStart] = useState(dayjs(new Date()));
     const [end, setEnd] = useState(dayjs(new Date()))
+
+    useEffect(() => {
+        // clears localError state and my_entries global state in redux store
+        setLocalError("");
+        dispatch(clearMyEntries());
+    }, [])
     return (
         <>
             <header className = "mb-4 mx-auto w-full text-center pt-4">
@@ -51,14 +58,14 @@ const MyEntries = () => {
             </header>
             <div className = "flex flex-wrap gap-4 w-full justify-center pt-4 pb-8">               
                 {loading && <Loading />}
-                {error && <Alert color="failure" onDismiss={() => {}}>
-                    <span className="font-medium">Latest posts:</span> {error}
+                {error && <Alert color="failure" className = "mt-4">
+                    <span className="font-medium">MyEntries:</span> {error}
                 </Alert>}
-                {localError && <Alert color="failure" onDismiss={() => {}}>
-                    <span className="font-medium">Latest posts</span> {localError}
+                {localError && <Alert color="failure" className = "mt-4">
+                    <span className="font-medium">MyEntries:</span> {localError}
                 </Alert>}                 
-                {!loading && entries.length === 0 && <Alert color="success" onDismiss={() => {}}>
-                    <span className="font-medium">Please select a time frame to load your posts or add posts to see them here.</span> 
+                {!loading && !error && !localError && entries.length === 0 && <Alert color="success" className = "mt-4">
+                    <span className="font-medium">Please select a time frame to load your posts or add posts to see them here. Be sure to pick a valid timeframe</span> 
                 </Alert>}   
                 {!loading && entries.map((item) => {
                     const {entry, createdAt, _id} = item;
