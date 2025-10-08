@@ -6,12 +6,11 @@ require('dotenv').config()
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("connected to db");
+    await mongoose.connect(process.env.MONGO_URI);    
   } catch (e) {
-    console.log("failed to connect to database"); 
-    console.log(e);
-    process.exit(1);
+    return res.status(404).json({
+        error: "Something went wrong. Please try later or refresh page",
+    });
   }
 };
 
@@ -26,7 +25,6 @@ const getMyFriends = async (req, res) => {
         );
     }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: "Could not fetch your friends. Please refresh the page."})
     }
   }
@@ -51,13 +49,10 @@ const getMyFriends = async (req, res) => {
         await friend.save();
         await requester.save();
         return res.status(200).json({
-            // friend_model: friend.friend_requests,
-            // requester_model: requester.friend_requests_sent,
             message: "Your friend request has been sent"
         })
   }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: "Could not send friend request at this time. Please refresh page."})
     }
   }
@@ -90,7 +85,6 @@ const getMyFriends = async (req, res) => {
         })
     }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: "Could not reject friend request at this time. Please refresh page."})
     }
   }
@@ -129,7 +123,6 @@ const getMyFriends = async (req, res) => {
         })
     }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: "Could not accept friend request at this time. Please refresh page."})
     }
   }
@@ -146,7 +139,6 @@ const getMyFriends = async (req, res) => {
         })
     }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: "Could not get your friend requests at this time. Please refresh page."})
     }
   }
@@ -161,7 +153,6 @@ const getMyFriends = async (req, res) => {
         })
     }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: "Could not get your friend requests sent at this time. Please refresh page."})
     }
   }
@@ -197,7 +188,6 @@ const getMyFriends = async (req, res) => {
         })
     }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: "Could not delete the friend request at this time. Please refresh page."})
     }
   }
@@ -232,7 +222,6 @@ const getMyFriends = async (req, res) => {
         })
     }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: "Could not remove friend at this time. Please refresh page."})
     }
   }
@@ -270,7 +259,6 @@ const getMyFriends = async (req, res) => {
         return res.status(200).json({data: data});
     }
     catch(e) {
-        console.log(e);
         return res.status(404).json({error: 'Could not search users at the moment. Please refresh the page.'})
     }
   }

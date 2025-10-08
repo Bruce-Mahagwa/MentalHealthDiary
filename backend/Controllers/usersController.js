@@ -13,11 +13,10 @@ const UserModel = require("../Models/UserModel");
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("connected to db");
   } catch (e) {
-    console.log("failed to connect to database"); 
-    console.log(e);
-    process.exit(1);
+    return res.status(404).json({
+          error: "Something went wrong. Please try later or refresh page",
+    });
   }
 };
 
@@ -67,7 +66,6 @@ const registerUser = async (req, res) => {
         },
       });
   } catch (e) {
-      console.log(e)
       return res.status(404).json({
           error: "Could not register you at the moment. Please try later",
       });
@@ -116,7 +114,6 @@ const loginUser = async (req, res) => {
         .json({ error: "Wrong password. Please try again" });
     }
   } catch (e) {
-      console.log(e)
       return res.status(401).json({ error: "Could not login user"});
   }
 };
@@ -143,7 +140,6 @@ const saveUserProfile = async (req, res) => {
     });
   }
   catch (e) {
-    console.log(e);
     return res
       .status(404)
       .json({ error: "Could not update profile. Please try again later"});
@@ -157,7 +153,6 @@ const getUserProfile = async (req, res) => {
     const user = await UserModel.findById(id).select({userName: 1, firstName: 1, lastName: 1, highlight: 1});
     return res.status(200).json({ data: user });
   } catch (e) {
-    console.log(e);
     return res
       .status(404)
       .json({ error: "Could not load user profile. Please reload the page"});
@@ -171,8 +166,7 @@ const logOutUser = (req, res) => {
       .json({message: "You have been logged out. Come again soon!!!"});
   } 
   catch (e) {
-    console.log(e)
-    return res.status(500).json({ error: "Could not logout"});
+    return res.status(500).json({ error: "Could not logout. Please refresh page"});
   }
 };
 
