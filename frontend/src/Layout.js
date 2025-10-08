@@ -3,17 +3,17 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
 import axios from "axios";
-
+ 
 const Layout = () => {
   // protected routes
-  const [isAuth, setIsAuth] = useState("");
+  const [isAuth, setIsAuth] = useState("n");
   const [error, setError] = useState("");
   const { user } = useSelector(state => state.users);
   const name = user?.userName;
 
   useEffect(() => {
     axios.get("/get-token").then((res) => {
-      setIsAuth(res.data.token);
+      setIsAuth(res.data.token.userName);
     }).catch((e) => {
       setError(e.message);
     })

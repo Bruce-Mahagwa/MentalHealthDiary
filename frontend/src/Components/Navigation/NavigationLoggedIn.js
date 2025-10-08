@@ -13,8 +13,10 @@ import { useState } from "react";
 
 const NavigationLoggedIn = ({setIsOpenMenu}) => {  
     const dispatch = useDispatch();
+    const { user } = useSelector(state => state.users);
+    const createdAt = user?.createdAt; // checks if the user has logged in before. if the user has logged in before do not open about modal
     // state
-    const [openAboutModal, setOpenAboutModal] = useState(true);
+    const [openAboutModal, setOpenAboutModal] = useState(createdAt ? false : true);
     const [openProfileModal, setOpenProfileModal] = useState(false);
     const {userName} = useSelector(state => state.users.user)
     return (
