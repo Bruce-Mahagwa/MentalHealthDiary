@@ -15,13 +15,12 @@ app.get("/get-token", (req, res) => {
   try {
     const accessToken = req.cookies["access_token"];
     const decoded = jwt.verify(accessToken, process.env.JWT_SECRET);    
-    // return res.json({
-    //   token: {
-    //     userName: decoded.userName,
-    //     createdAt: decoded.createdAt
-    //   }
-    // });
-    return res.json({ token: decoded });
+    return res.json({
+      token: {
+        userName: decoded.userName,
+        createdAt: decoded.createdAt
+      }
+    });
   }
   catch (e) {
     return res.status(401).json({ error: "Unauthorized User" });
