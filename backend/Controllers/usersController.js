@@ -104,7 +104,8 @@ const loginUser = async (req, res) => {
           data: { 
             _id: user._id,
             userName: user.userName,
-            email: user.email
+            email: user.email,
+            createdAt: user?.createdAt || ""
           },
         });
     } 
