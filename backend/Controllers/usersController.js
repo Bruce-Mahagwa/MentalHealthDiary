@@ -63,6 +63,7 @@ const registerUser = async (req, res) => {
           _id: new_user._id,
           userName: new_user.userName,
           email: new_user.email,
+          created_at: new_user.createdAt
         },
       });
   } catch (e) {
@@ -105,6 +106,7 @@ const loginUser = async (req, res) => {
             _id: user._id,
             userName: user.userName,
             email: user.email,              
+            created_at: user.createdAt
           },
         });
     } 
