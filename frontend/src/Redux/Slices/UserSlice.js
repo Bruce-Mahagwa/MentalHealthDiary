@@ -13,7 +13,11 @@ const initialState = {
 const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
+    reducers: {
+        clearError: (state) => {
+            state.error = null;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(registerUser.pending, (state, action) => {
             state.loading = true;           
@@ -23,7 +27,7 @@ const userSlice = createSlice({
         }).addCase(registerUser.fulfilled, (state, action) => {
             const {data} = action.payload.data;
             state.user = data;
-            state.loading = false;
+            state.loading = false;            
         }).addCase(logoutUser.fulfilled, (state) => {
             state.user = {};
             state.userProfile = {}
@@ -53,10 +57,11 @@ const userSlice = createSlice({
         }).addCase(saveUserProfile.fulfilled, (state, action) => {
             const {data} = action.payload;
             state.loading = false;
-            state.userProfile = data;
-            console.log(data)
+            state.userProfile = data;            
         })
     }
 })
 
 export default userSlice.reducer
+
+export const {clearError} = userSlice.actions

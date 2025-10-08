@@ -1,10 +1,11 @@
 // dependencies
 import { Button, Label, TextInput, Modal, Spinner } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Alert from '@mui/material/Alert';
 // functions
 import { handleLogin } from "./lib";
+import { clearError } from "../../Redux/Slices/UserSlice";
 
 const Login = ({openModalLogin, setOpenModalLogin}) => {
     const dispatch = useDispatch();
@@ -21,6 +22,11 @@ const Login = ({openModalLogin, setOpenModalLogin}) => {
         e.preventDefault()
         return handleLogin(dispatch, setLocalError, userName, password)
     }
+
+    useEffect(() => {
+        dispatch(clearError())
+    }, [openModalLogin])
+    
     return ( 
         <>        
         <Modal show={openModalLogin} onClose={() => setOpenModalLogin(false)} dismissible>
