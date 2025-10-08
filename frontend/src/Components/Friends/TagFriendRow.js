@@ -1,7 +1,7 @@
 // dependencies
 import { Checkbox, Label } from "flowbite-react";
 import { useEffect, useState } from "react";
-const TagFriendRow = ({userName, _id, tags, setTags}) => { 
+const TagFriendRow = ({ userName, _id, tags, setTags}) => {
 
     const [isChecked, setIsChecked] = useState(false);
 
@@ -18,12 +18,12 @@ const TagFriendRow = ({userName, _id, tags, setTags}) => {
                 setTags([...new_arr])
             }
         }
-    }, [isChecked]) 
+    }, [isChecked])
 
     return (
-        <div htmlFor= {userName} className = "flex justify-between w-full md:w-1/2 md:mx-auto lg:w-1/2 border-gray-400 border-1 align-middle p-2 sm:p-4 md:px-8 cursor-pointer">
-            <Checkbox id={userName} checked = {isChecked}  onChange={() => setIsChecked(!isChecked)} className="cursor-pointer"/>
-            <Label htmlFor={userName} className="cursor-pointer">{userName}</Label>
+        <div className="flex justify-between w-full md:w-1/2 md:mx-auto lg:w-1/2 border-gray-400 border-1 align-middle p-2 sm:p-4 md:px-8 cursor-pointer hover:opacity-0.7">
+            <Checkbox id={userName} checked={isChecked} onChange={() => setIsChecked(!isChecked)} className="cursor-pointer" />
+            <Label htmlFor={userName} className="cursor-pointer flex-1 ml-4">{userName}</Label>
         </div>
     )
 }

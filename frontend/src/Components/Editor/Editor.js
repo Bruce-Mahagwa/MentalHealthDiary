@@ -46,14 +46,14 @@ const Editor = () => {
 
         <textarea value={value} onChange={(e) => setValue(e.currentTarget.value)} className='h-80 w-full p-4 rounded' />
 
-        <footer className="mt-4 md:mt-8"> 
+        <footer className="mt-4 md:mt-8">  
             <nav className = "flex gap-4 mx-auto w-max"> 
                 {!loading && <Button color="success" onClick = {() => handleDiaryEntry(setLocalError, dispatch, value, tags)}>Add</Button>}
                 {loading && <Button type="submit" disabled className = "text-black" color = "success">
                     <Spinner aria-label="Spinner button example" size="md" color = "success" />
                 </Button>}
                 {!loading && <Button color = "gray" className = "flex items-baseline gap-4 hover:opacity-50" outline onClick={() => {setOpenModal(true); setTags([])}}>Tag
-                    <FaPlus className = "h-4 w-4" />
+                    <FaPlus className = "ml-2 mt-[2px] h-4 w-4" />
                 </Button>}        
             </nav>
 

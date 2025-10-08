@@ -15,7 +15,6 @@ const FriendsRequests = () => {
         getMyFriendRequestsHandler(dispatch, setLocalError);
     }, [])
     const {requests, loading, error} = useSelector(state => state.friends.friend_requests)
-    // console.log(requests)
     return (
         <>
         <header className = "mb-4 mx-auto w-max text-center pt-4">

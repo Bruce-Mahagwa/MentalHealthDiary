@@ -3,6 +3,10 @@ import { makeDiaryEntry } from "../../Redux/Actions/DiaryActions";
 
 export const handleDiaryEntry = (setLocalError, dispatch, value, tags) => {
     try {
+        if (!value) {
+            setLocalError("Entry cannot be empty");
+            return;            
+        }
         dispatch(makeDiaryEntry({"entry": value, "tags": tags}));
     }
     catch(e) {

@@ -37,7 +37,7 @@ const SearchFriends = () => {
         <>
         <header className = "mb-2 mx-auto w-max text-center pt-4">
             <h3>Search Users</h3>
-            <p>You can only search for users that are not your friends</p>
+            <p>You can only search for users that are not your friends. Try sending requests to existing users such as BrunoK and kadenyiT</p>
         </header>
         <div className = "py-8">
             {/* start of navigation for search */}
