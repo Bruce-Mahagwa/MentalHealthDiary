@@ -19,7 +19,7 @@ app.get("/get-token", async (req, res) => {
     const user = await UserModel.findById(decoded._id).select({createdAt: 1});
     return res.status(200).json({
       token: {
-        userName: decoded.userName,
+        // userName: decoded.userName,
         createdAt: user.createdAt.toISOString || null
       }
     });
