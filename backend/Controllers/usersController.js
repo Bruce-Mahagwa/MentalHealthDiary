@@ -53,6 +53,7 @@ const registerUser = async (req, res) => {
           new_user._id,
           new_user.userName,
           new_user.email,
+          new_user.createdAt
         ),
         { httpOnly: true, secure: true, sameSite: "None" },
       )
@@ -97,12 +98,12 @@ const loginUser = async (req, res) => {
       return res 
         .cookie(
           "access_token",
-          generateCookie(user._id, user.userName, user.email),
+          generateCookie(user._id, user.userName, user.email, user.createdAt),
           cookieParams,
         )
         .json({
           message: "user logged in",
-          data: {
+          data: { 
             _id: user._id,
             userName: user.userName,
             email: user.email,              
