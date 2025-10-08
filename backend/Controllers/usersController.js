@@ -52,8 +52,7 @@ const registerUser = async (req, res) => {
         generateCookie(
           new_user._id,
           new_user.userName,
-          new_user.email,
-          new_user.createdAt.toISOString()
+          new_user.email
         ),
         { httpOnly: true, secure: true, sameSite: "None" },
       )
@@ -63,8 +62,7 @@ const registerUser = async (req, res) => {
         data: {
           _id: new_user._id,
           userName: new_user.userName,
-          email: new_user.email,
-          created_at: new_user.createdAt.toISOString()
+          email: new_user.email
         },
       });
   } catch (e) {
@@ -98,7 +96,7 @@ const loginUser = async (req, res) => {
       return res 
         .cookie(
           "access_token",
-          generateCookie(user._id, user.userName, user.email, user.createdAt.toISOString()),
+          generateCookie(user._id, user.userName, user.email),
           cookieParams,
         )
         .json({
@@ -106,8 +104,7 @@ const loginUser = async (req, res) => {
           data: { 
             _id: user._id,
             userName: user.userName,
-            email: user.email,              
-            createdAt: user.createdAt.toISOString()
+            email: user.email
           },
         });
     } 
