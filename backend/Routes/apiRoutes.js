@@ -17,10 +17,10 @@ app.get("/get-token", async (req, res) => {
     const accessToken = req.cookies["access_token"];
     const decoded = jwt.verify(accessToken, process.env.JWT_SECRET);    
     const user = await UserModel.findById(decoded._id).select({createdAt: 1});
-    return res.json({
+    return res.status(200).json({
       token: {
         userName: decoded.userName,
-        createdAt: user?.createdAt?.toISOString || null
+        createdAt: user.createdAt.toISOString || null
       }
     });
   }
